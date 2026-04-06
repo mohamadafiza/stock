@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Stok Perisa - Kohs / Syokbar & Fuselab</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 15px;
+      color: #333;
+    }
+    h2 {
+      text-align: center;
+      margin: 15px 0;
+      color: #444;
+    }
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .category {
+      background: #e9ecef;
+      padding: 8px 15px;
+      margin: 20px 0 8px 0;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+    .item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: white;
+      padding: 12px 15px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .flavor {
+      flex: 1;
+      font-weight: 500;
+    }
+    input[type="number"] {
+      width: 80px;
+      text-align: center;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    .copy-area {
+      margin-top: 25px;
+      text-align: center;
+    }
+    button {
+      background: #0066cc;
+      color: white;
+      border: none;
+      padding: 14px 30px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0055aa;
+    }
+    #result {
+      margin-top: 15px;
+      white-space: pre-wrap;
+      background: #fff;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      min-height: 80px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2>Stok Perisa Kohs / Syokbar & Fuselab</h2>
+  
+  <div class="category">🍭 Kohs / Syokbar Flavors</div>
+  <div class="item"><div class="flavor">Vanilla Lime (Solero Lime)</div><input type="number" min="0" data-flavor="Vanilla Lime (Solero Lime)"></div>
+  <div class="item"><div class="flavor">Teh (Teh Tarik Ice)</div><input type="number" min="0" data-flavor="Teh (Teh Tarik Ice)"></div>
+  <div class="item"><div class="flavor">Starfruit / Calamansi (EnergyDrink/Redbull)</div><input type="number" min="0" data-flavor="Starfruit / Calamansi (EnergyDrink/Redbull)"></div>
+  <div class="item"><div class="flavor">Strawberry Apple</div><input type="number" min="0" data-flavor="Strawberry Apple"></div>
+  <div class="item"><div class="flavor">Orange Pineapple</div><input type="number" min="0" data-flavor="Orange Pineapple"></div>
+  <div class="item"><div class="flavor">Banana Vanilla (Banana Milkshake)</div><input type="number" min="0" data-flavor="Banana Vanilla (Banana Milkshake)"></div>
+  <div class="item"><div class="flavor">Pineapple (Pineapple Bubblegum)</div><input type="number" min="0" data-flavor="Pineapple (Pineapple Bubblegum)"></div>
+  <div class="item"><div class="flavor">Strawberry Vanilla (Strawberry Ice Cream)</div><input type="number" min="0" data-flavor="Strawberry Vanilla (Strawberry Ice Cream)"></div>
+  <div class="item"><div class="flavor">Honeydew (Honeydew Bubblegum)</div><input type="number" min="0" data-flavor="Honeydew (Honeydew Bubblegum)"></div>
+  <div class="item"><div class="flavor">Honeydew Strawberry</div><input type="number" min="0" data-flavor="Honeydew Strawberry"></div>
+  <div class="item"><div class="flavor">Strawberry Peach</div><input type="number" min="0" data-flavor="Strawberry Peach"></div>
+  <div class="item"><div class="flavor">Pineapple Blackcurrant</div><input type="number" min="0" data-flavor="Pineapple Blackcurrant"></div>
+  <div class="item"><div class="flavor">Mango Vanilla (Mango Ice Cream)</div><input type="number" min="0" data-flavor="Mango Vanilla (Mango Ice Cream)"></div>
+  <div class="item"><div class="flavor">Lemon (Ice Lemon Tea)</div><input type="number" min="0" data-flavor="Lemon (Ice Lemon Tea)"></div>
+  <div class="item"><div class="flavor">Apple Plum</div><input type="number" min="0" data-flavor="Apple Plum"></div>
+
+  <div class="category">⚡ Fuselab Flavors</div>
+  <div class="item"><div class="flavor">Mango</div><input type="number" min="0" data-flavor="Mango"></div>
+  <div class="item"><div class="flavor">Honeydew</div><input type="number" min="0" data-flavor="Honeydew"></div>
+  <div class="item"><div class="flavor">Watermelon Berry</div><input type="number" min="0" data-flavor="Watermelon Berry"></div>
+  <div class="item"><div class="flavor">Orange Mango Pineapple</div><input type="number" min="0" data-flavor="Orange Mango Pineapple"></div>
+  <div class="item"><div class="flavor">Grapefruit / Yuzu (Hundred Plus)</div><input type="number" min="0" data-flavor="Grapefruit / Yuzu (Hundred Plus)"></div>
+  <div class="item"><div class="flavor">LemonCherry / Cherimoya (Sour Bubblegum)</div><input type="number" min="0" data-flavor="LemonCherry / Cherimoya (Sour Bubblegum)"></div>
+  <div class="item"><div class="flavor">Vanilla Taro (Taro Ice Cream)</div><input type="number" min="0" data-flavor="Vanilla Taro (Taro Ice Cream)"></div>
+  <div class="item"><div class="flavor">Blackcurrant Lychee (Rybena Lychee)</div><input type="number" min="0" data-flavor="Blackcurrant Lychee (Rybena Lychee)"></div>
+  <div class="item"><div class="flavor">Vanilla Corn (Caramel Corn Pudding)</div><input type="number" min="0" data-flavor="Vanilla Corn (Caramel Corn Pudding)"></div>
+  <div class="item"><div class="flavor">Vanilla Pistachio (Pistachio Ice Cream)</div><input type="number" min="0" data-flavor="Vanilla Pistachio (Pistachio Ice Cream)"></div>
+  <div class="item"><div class="flavor">Grape</div><input type="number" min="0" data-flavor="Grape"></div>
+  <div class="item"><div class="flavor">Berry Vanilla (Berry Yogurt)</div><input type="number" min="0" data-flavor="Berry Vanilla (Berry Yogurt)"></div>
+  <div class="item"><div class="flavor">Mango Grape Orange</div><input type="number" min="0" data-flavor="Mango Grape Orange"></div>
+  <div class="item"><div class="flavor">Kiwi Mango Watermelon</div><input type="number" min="0" data-flavor="Kiwi Mango Watermelon"></div>
+  <div class="item"><div class="flavor">Strawberry Grape Apple</div><input type="number" min="0" data-flavor="Strawberry Grape Apple"></div>
+  
+  <div class="copy-area">
+    <button onclick="copyToClipboard()">Copy To Clipboard</button>
+    <div id="result"></div>
+  </div>
+</div>
+
+<script>
+function copyToClipboard() {
+  const inputs = document.querySelectorAll('input[type="number"]');
+  let text = "*Kohs / Syokbar Flavors*\n";
+  let hasItem = false;
+  
+  // First collect Kohs/Syokbar items (first 15 items)
+  const kohsInputs = Array.from(inputs).slice(0, 15);
+  for (let input of kohsInputs) {
+    const qty = input.value.trim();
+    const flavor = input.getAttribute('data-flavor');
+    if (qty !== "" && qty !== "0" && !isNaN(qty) && Number(qty) > 0) {
+      text += `${flavor} - ${qty}\n`;
+      hasItem = true;
+    }
+  }
+  
+  // Add Fuselab section
+  text += "\n*Fuselab Flavors*\n";
+  const fuselabInputs = Array.from(inputs).slice(15);
+  for (let input of fuselabInputs) {
+    const qty = input.value.trim();
+    const flavor = input.getAttribute('data-flavor');
+    if (qty !== "" && qty !== "0" && !isNaN(qty) && Number(qty) > 0) {
+      text += `${flavor} - ${qty}\n`;
+      hasItem = true;
+    }
+  }
+  
+  if (!hasItem) {
+    text = "Tiada stok dimasukkan / semua 0";
+  }
+  
+  navigator.clipboard.writeText(text).then(() => {
+    const resultDiv = document.getElementById('result');
+    resultDiv.textContent = text;
+    resultDiv.style.display = 'block';
+    setTimeout(() => {
+      resultDiv.style.display = 'none';
+    }, 8000);
+  }).catch(err => {
+    alert("Gagal copy: " + err);
+  });
+}
+</script>
+</body>
+</html>
