@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Stok E-Liquid - Kohs / Syokbar & Fuselab</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #f5f7fb;
+      margin: 0;
+      padding: 20px 12px;
+      color: #1e2a3a;
+    }
+    h2 {
+      text-align: center;
+      margin: 0 0 8px 0;
+      font-size: 1.7rem;
+      font-weight: 600;
+      color: #0f2b3d;
+      letter-spacing: -0.3px;
+    }
+    .sub {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #4a627a;
+      margin-bottom: 24px;
+      border-bottom: 1px solid #e2e8f0;
+      display: inline-block;
+      width: auto;
+      margin-left: auto;
+      margin-right: auto;
+      padding-bottom: 6px;
+    }
+    .container {
+      max-width: 580px;
+      margin: 0 auto;
+    }
+    /* brand section styling */
+    .brand-section {
+      margin-top: 24px;
+      margin-bottom: 16px;
+      border-radius: 16px;
+      background: #ffffffdd;
+    }
+    .brand-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      padding: 8px 12px 4px 12px;
+      margin: 0 0 8px 0;
+      background: linear-gradient(135deg, #f0f4f9 0%, #ffffff 100%);
+      border-left: 5px solid #e67e22;
+      border-radius: 14px 14px 0 0;
+      color: #c4450c;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .brand-title.fuselab {
+      border-left-color: #2c7da0;
+      color: #1f5e7e;
+    }
+    .brand-icon {
+      font-size: 1.4rem;
+    }
+    .item-list {
+      background: white;
+      border-radius: 18px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+    .item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: white;
+      padding: 12px 16px;
+      border-bottom: 1px solid #edf2f7;
+      transition: background 0.1s ease;
+    }
+    .item:last-child {
+      border-bottom: none;
+    }
+    .flavor {
+      flex: 1;
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: #1e293b;
+      letter-spacing: -0.2px;
+    }
+    input[type="number"] {
+      width: 88px;
+      text-align: center;
+      padding: 9px 6px;
+      border: 1px solid #cbd5e1;
+      border-radius: 40px;
+      font-size: 15px;
+      font-weight: 500;
+      background: #fefefe;
+      transition: all 0.2s;
+      font-family: monospace;
+    }
+    input[type="number"]:focus {
+      outline: none;
+      border-color: #e67e22;
+      box-shadow: 0 0 0 2px rgba(230,126,34,0.2);
+    }
+    input[type="number"]:hover {
+      border-color: #94a3b8;
+    }
+    .copy-area {
+      margin-top: 28px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    button {
+      background: #1e466e;
+      color: white;
+      border: none;
+      padding: 14px 34px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 60px;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    button:hover {
+      background: #0f3555;
+      transform: scale(0.98);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+    button:active {
+      background: #09263f;
+    }
+    #result {
+      margin-top: 18px;
+      white-space: pre-wrap;
+      background: #1e293b;
+      color: #e2e8f0;
+      padding: 14px 18px;
+      border-radius: 20px;
+      border: 1px solid #334155;
+      min-height: 85px;
+      display: none;
+      font-family: 'SF Mono', 'Menlo', monospace;
+      font-size: 0.85rem;
+      text-align: left;
+      word-break: break-word;
+      line-height: 1.45;
+    }
+    .footer-note {
+      text-align: center;
+      font-size: 0.7rem;
+      color: #6c7a91;
+      margin-top: 20px;
+    }
+    @media (max-width: 480px) {
+      .item {
+        padding: 10px 12px;
+      }
+      .flavor {
+        font-size: 0.85rem;
+      }
+      input[type="number"] {
+        width: 75px;
+        padding: 7px 4px;
+      }
+      button {
+        padding: 12px 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2>🧪 Stok E-Liquid</h2>
+  <div style="text-align: center; margin-bottom: 10px;">
+    <span class="sub">Kohs / Syokbar + Fuselab</span>
+  </div>
+
+  <!-- KOHS / SYOKBAR SECTION -->
+  <div class="brand-section">
+    <div class="brand-title">
+      <span class="brand-icon">🥤</span> Kohs / Syokbar E-Liquid
+    </div>
+    <div class="item-list" id="kohs-list">
+      <!-- Data Kohs / Syokbar (10 items) -->
+      <div class="item"><div class="flavor">Teh (Teh Tarik Ice)</div><input type="number" min="0" data-brand="kohs" data-flavor="Teh (Teh Tarik Ice)"></div>
+      <div class="item"><div class="flavor">Mango Peach</div><input type="number" min="0" data-brand="kohs" data-flavor="Mango Peach"></div>
+      <div class="item"><div class="flavor">Strawberry Kiwi</div><input type="number" min="0" data-brand="kohs" data-flavor="Strawberry Kiwi"></div>
+      <div class="item"><div class="flavor">Pistachio Vanilla (Pistachio Ice Cream)</div><input type="number" min="0" data-brand="kohs" data-flavor="Pistachio Vanilla (Pistachio Ice Cream)"></div>
+      <div class="item"><div class="flavor">Honeydew Melon</div><input type="number" min="0" data-brand="kohs" data-flavor="Honeydew Melon"></div>
+      <div class="item"><div class="flavor">Strawberry Vanilla</div><input type="number" min="0" data-brand="kohs" data-flavor="Strawberry Vanilla"></div>
+      <div class="item"><div class="flavor">Strawberry Mango</div><input type="number" min="0" data-brand="kohs" data-flavor="Strawberry Mango"></div>
+      <div class="item"><div class="flavor">Mango Blackcurrant</div><input type="number" min="0" data-brand="kohs" data-flavor="Mango Blackcurrant"></div>
+      <div class="item"><div class="flavor">Pineapple Blackcurrant</div><input type="number" min="0" data-brand="kohs" data-flavor="Pineapple Blackcurrant"></div>
+      <div class="item"><div class="flavor">Watermelon Strawberry</div><input type="number" min="0" data-brand="kohs" data-flavor="Watermelon Strawberry"></div>
+    </div>
+  </div>
+
+  <!-- FUSELAB SECTION -->
+  <div class="brand-section">
+    <div class="brand-title fuselab">
+      <span class="brand-icon">⚡</span> Fuselab E-Liquid
+    </div>
+    <div class="item-list" id="fuselab-list">
+      <div class="item"><div class="flavor">Taro Vanilla (Taro Ice Cream)</div><input type="number" min="0" data-brand="fuselab" data-flavor="Taro Vanilla (Taro Ice Cream)"></div>
+      <div class="item"><div class="flavor">Strawberry Grape Apple</div><input type="number" min="0" data-brand="fuselab" data-flavor="Strawberry Grape Apple"></div>
+      <div class="item"><div class="flavor">Grapefruit (Hundred)</div><input type="number" min="0" data-brand="fuselab" data-flavor="Grapefruit (Hundred)"></div>
+      <div class="item"><div class="flavor">Mango Grape Orange</div><input type="number" min="0" data-brand="fuselab" data-flavor="Mango Grape Orange"></div>
+      <div class="item"><div class="flavor">Berry (Berry Yogurt)</div><input type="number" min="0" data-brand="fuselab" data-flavor="Berry (Berry Yogurt)"></div>
+      <div class="item"><div class="flavor">Lemon (Lemon Sprite)</div><input type="number" min="0" data-brand="fuselab" data-flavor="Lemon (Lemon Sprite)"></div>
+      <div class="item"><div class="flavor">Strawberry</div><input type="number" min="0" data-brand="fuselab" data-flavor="Strawberry"></div>
+      <div class="item"><div class="flavor">Honeydew</div><input type="number" min="0" data-brand="fuselab" data-flavor="Honeydew"></div>
+      <div class="item"><div class="flavor">Pineapple</div><input type="number" min="0" data-brand="fuselab" data-flavor="Pineapple"></div>
+      <div class="item"><div class="flavor">Grape</div><input type="number" min="0" data-brand="fuselab" data-flavor="Grape"></div>
+    </div>
+  </div>
+  
+  <div class="copy-area">
+    <button onclick="copyToClipboard()">📋 Copy Stok ke Clipboard</button>
+    <div id="result"></div>
+  </div>
+  <div class="footer-note">
+    ✅ Masukkan kuantiti untuk setiap perisa. Kosong atau 0 akan diabaikan.
+  </div>
+</div>
+
+<script>
+  function copyToClipboard() {
+    // select all number inputs
+    const inputs = document.querySelectorAll('input[type="number"]');
+    
+    // Prepare arrays for Kohs and Fuselab sections
+    let kohsLines = [];
+    let fuselabLines = [];
+    
+    inputs.forEach(input => {
+      const qty = input.value.trim();
+      const flavorRaw = input.getAttribute('data-flavor');
+      const brand = input.getAttribute('data-brand');
+      
+      // Check valid quantity: not empty, not "0", valid number, and positive integer (>=1)
+      let isValid = false;
+      let numericQty = 0;
+      if (qty !== "" && !isNaN(qty) && qty !== null) {
+        numericQty = Number(qty);
+        if (Number.isInteger(numericQty) && numericQty > 0) {
+          isValid = true;
+        }
+      }
+      
+      if (isValid && flavorRaw) {
+        const line = `${flavorRaw} - ${numericQty}`;
+        if (brand === 'kohs') {
+          kohsLines.push(line);
+        } else if (brand === 'fuselab') {
+          fuselabLines.push(line);
+        } else {
+          // fallback (if any without brand, just treat as general but shouldn't happen)
+          // we ignore or push to general but not needed
+        }
+      }
+    });
+    
+    // Build final text with exact format: *Boldpod Cartridge* style but replaced
+    // Based on original structure but with new brand names & data.
+    let finalText = "";
+    let hasAnyItem = (kohsLines.length > 0 || fuselabLines.length > 0);
+    
+    if (!hasAnyItem) {
+      finalText = "Tiada stok dimasukkan / semua 0";
+    } else {
+      // Add Kohs / Syokbar header only if there are items
+      if (kohsLines.length > 0) {
+        finalText += "*Kohs / Syokbar E-Liquid*\n";
+        finalText += kohsLines.join("\n");
+      }
+      // Add Fuselab header if items exist, with spacing between sections
+      if (fuselabLines.length > 0) {
+        if (kohsLines.length > 0) finalText += "\n\n";  // blank line separator
+        finalText += "*Fuselab E-Liquid*\n";
+        finalText += fuselabLines.join("\n");
+      }
+    }
+    
+    // fallback trimming extra newlines at end
+    finalText = finalText.trimEnd();
+    
+    // Copy to clipboard
+    navigator.clipboard.writeText(finalText).then(() => {
+      const resultDiv = document.getElementById('result');
+      // display preview with nice formatting (preserve spaces)
+      resultDiv.textContent = finalText;
+      resultDiv.style.display = 'block';
+      
+      // auto-hide after 8 seconds
+      setTimeout(() => {
+        resultDiv.style.display = 'none';
+      }, 8000);
+    }).catch(err => {
+      alert("Gagal menyalin: " + err);
+    });
+  }
+  
+  // Optional: add listener to allow enter key to trigger copy? Not necessary but nice.
+  // Also allow manual "0" clear but leave as is.
+  // For better mobile UX: number inputs can accept decimal? min=0 and step=1 ensures integer.
+  // Add step="1" to all inputs for better control
+  document.querySelectorAll('input[type="number"]').forEach(inp => {
+    inp.setAttribute('step', '1');
+    inp.setAttribute('inputmode', 'numeric');
+    // optional: prevent negative by min already set
+    inp.addEventListener('blur', function() {
+      let val = parseInt(this.value, 10);
+      if (isNaN(val)) {
+        this.value = '';
+      } else if (val < 0) {
+        this.value = 0;
+      }
+    });
+  });
+</script>
+</body>
+</html>
