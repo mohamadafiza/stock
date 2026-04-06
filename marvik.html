@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Marvik Flavor · Stok Cartridge</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #f4f7fc;
+      padding: 20px 16px 40px;
+      color: #1a2c3e;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* header */
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .header h2 {
+      font-size: 1.85rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #1e2a3a, #0f2c3b);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: -0.2px;
+      margin-bottom: 6px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #d9e9fa;
+      padding: 4px 12px;
+      border-radius: 40px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #005f8c;
+    }
+
+    /* stok grid / list */
+    .stock-list {
+      background: transparent;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 20px 0 28px;
+    }
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: white;
+      padding: 12px 18px;
+      border-radius: 20px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.03);
+      transition: all 0.2s ease;
+      border: 1px solid #eef2f5;
+    }
+
+    .item:hover {
+      border-color: #cbdde9;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .flavor {
+      flex: 1;
+      font-weight: 540;
+      font-size: 1rem;
+      color: #1f3b4c;
+      letter-spacing: -0.2px;
+    }
+
+    input[type="number"] {
+      width: 88px;
+      text-align: center;
+      padding: 10px 6px;
+      border: 1.5px solid #e2edf2;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 500;
+      background: #ffffff;
+      transition: 0.2s;
+      font-family: monospace;
+      color: #0b4b6b;
+    }
+
+    input[type="number"]:focus {
+      outline: none;
+      border-color: #2c7da0;
+      box-shadow: 0 0 0 2px rgba(44, 125, 160, 0.2);
+    }
+
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    input[type="number"] {
+      -moz-appearance: textfield;
+    }
+
+    /* action area */
+    .action-area {
+      text-align: center;
+      margin: 8px 0 20px;
+    }
+
+    .btn-copy {
+      background: #1e6f5c;
+      border: none;
+      padding: 14px 28px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 48px;
+      color: white;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: 0.2s;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-copy:hover {
+      background: #0e5a49;
+      transform: scale(0.98);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-copy:active {
+      background: #0a4538;
+    }
+
+    #result {
+      margin-top: 24px;
+      white-space: pre-wrap;
+      word-break: break-word;
+      background: #fef9e6;
+      padding: 16px 18px;
+      border-radius: 24px;
+      border-left: 5px solid #1e6f5c;
+      font-family: 'SF Mono', 'Menlo', monospace;
+      font-size: 0.85rem;
+      line-height: 1.45;
+      color: #1e3b2f;
+      display: none;
+      text-align: left;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+
+    .footer-note {
+      text-align: center;
+      font-size: 0.7rem;
+      color: #6f8f9f;
+      margin-top: 24px;
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 14px;
+      }
+      .item {
+        padding: 10px 14px;
+      }
+      .flavor {
+        font-size: 0.9rem;
+      }
+      input[type="number"] {
+        width: 76px;
+        font-size: 0.9rem;
+        padding: 8px 4px;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h2>🥤 Marvik Flavor</h2>
+    <div class="badge">📦 stok cartridge · kemas kini kuantiti</div>
+  </div>
+
+  <div class="stock-list" id="flavorList">
+    <!-- data akan dijana oleh js (senarai lengkap Marvik Flavor) 
+         untuk memudahkan pengubahsuaian dan kekemasan -->
+  </div>
+
+  <div class="action-area">
+    <button class="btn-copy" onclick="copyStockToClipboard()">
+      📋 Copy To Clipboard
+    </button>
+    <div id="result"></div>
+  </div>
+  <div class="footer-note">
+    ✨ Masukkan kuantiti stok untuk setiap perisa — hanya item bukan sifar akan disalin.
+  </div>
+</div>
+
+<script>
+  // ========================
+  // DATA MARVIK FLAVOR (mengikut permintaan)
+  // ========================
+  const MARVIK_FLAVORS = [
+    "Hazelnut Vanilla",
+    "Vanilla Lemon",
+    "Pistachio Vanilla",
+    "Tea (Teh Tarik)",
+    "Corn",
+    "Orange Mango Guava",
+    "Strawberry Lemon",
+    "Blackcurrant Kiwi",
+    "Peach Strawberry",
+    "Watermelon",
+    "Sarsapila",
+    "Mango Pineapple",
+    "Strawberry (Strawberry Cheesecake)",
+    "Yam",
+    "Mango",
+    "Strawberry Grape",
+    "Peach Mango Watermelon",
+    "Watermelon Lychee",
+    "Coffee",
+    "Strawberry Mango",
+    "Honeydew",
+    "Pineapple Apple",
+    "Apple Lychee"
+  ];
+
+  // Fungsi untuk membina UI item stok secara dinamik
+  function buildStockUI() {
+    const stockContainer = document.getElementById('flavorList');
+    if (!stockContainer) return;
+    stockContainer.innerHTML = ''; // clear placeholder
+    
+    MARVIK_FLAVORS.forEach(flavor => {
+      const itemDiv = document.createElement('div');
+      itemDiv.className = 'item';
+      
+      const flavorSpan = document.createElement('div');
+      flavorSpan.className = 'flavor';
+      flavorSpan.textContent = flavor;
+      
+      const inputField = document.createElement('input');
+      inputField.type = 'number';
+      inputField.min = '0';
+      inputField.value = '0';
+      inputField.setAttribute('data-flavor', flavor);
+      inputField.setAttribute('aria-label', `Stok untuk ${flavor}`);
+      
+      // Optional: allow step 1, but keep integer default behavior
+      inputField.step = '1';
+      
+      itemDiv.appendChild(flavorSpan);
+      itemDiv.appendChild(inputField);
+      stockContainer.appendChild(itemDiv);
+    });
+  }
+
+  // Fungsi utama: salin stok (hanya yang >0)
+  function copyStockToClipboard() {
+    // Dapatkan semua input yang wujud selepas UI dibina
+    const allInputs = document.querySelectorAll('#flavorList input[type="number"]');
+    let outputText = "*Marvik Flavor*\n";
+    let hasNonZero = false;
+    
+    // Kumpulan data untuk disusun (optional) ikut urutan asal
+    for (let input of allInputs) {
+      const flavorName = input.getAttribute('data-flavor');
+      let rawValue = input.value.trim();
+      // parse integer, tolak nilai kosong atau bukan nombor
+      let qty = 0;
+      if (rawValue !== "") {
+        const parsed = parseInt(rawValue, 10);
+        if (!isNaN(parsed)) {
+          qty = parsed;
+        }
+      }
+      
+      // jika kuantiti lebih dari 0, tambah ke teks
+      if (qty > 0) {
+        outputText += `${flavorName} - ${qty}\n`;
+        hasNonZero = true;
+      }
+    }
+    
+    // jika tiada stok dimasukkan
+    if (!hasNonZero) {
+      outputText = "Tiada stok dimasukkan / semua 0";
+    }
+    
+    // salin ke clipboard
+    navigator.clipboard.writeText(outputText).then(() => {
+      const resultDiv = document.getElementById('result');
+      resultDiv.textContent = outputText;
+      resultDiv.style.display = 'block';
+      
+      // Auto hide selepas 7 saat (lebih selesa)
+      setTimeout(() => {
+        resultDiv.style.display = 'none';
+      }, 7000);
+    }).catch(err => {
+      alert("Gagal menyalin: " + err);
+      console.warn("Clipboard error: ", err);
+    });
+  }
+  
+  // Optional: tetapkan nilai default 0 untuk setiap input selepas render
+  // dan tambah event untuk elakkan nilai negatif (biar user taip - tapi kita normalize)
+  function enforceNonNegative() {
+    const container = document.getElementById('flavorList');
+    if (!container) return;
+    container.addEventListener('change', (e) => {
+      if (e.target && e.target.type === 'number') {
+        let val = parseInt(e.target.value, 10);
+        if (isNaN(val)) {
+          e.target.value = 0;
+        } else if (val < 0) {
+          e.target.value = 0;
+        }
+      }
+    });
+    // juga semasa input blur untuk pastikan
+    container.addEventListener('blur', (e) => {
+      if (e.target && e.target.type === 'number') {
+        let val = parseInt(e.target.value, 10);
+        if (isNaN(val)) e.target.value = 0;
+        else if (val < 0) e.target.value = 0;
+      }
+    }, true);
+  }
+  
+  // init halaman
+  function init() {
+    buildStockUI();        // hasilkan semua item berdasarkan senarai MARVIK_FLAVORS
+    enforceNonNegative(); // pastikan tiada nilai negatif
+    
+    // tambahan: tiny reset if needed - tapi user boleh taip terus
+    // set some dummy example? (semua 0 sudah okay)
+  }
+  
+  init();
+</script>
+</body>
+</html>
