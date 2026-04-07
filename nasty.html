@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Nasty 16k - Stok Cartridge</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #f8f9fc;
+      margin: 0;
+      padding: 16px;
+      color: #1a2c3e;
+    }
+
+    h2 {
+      text-align: center;
+      margin: 0 0 8px 0;
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      background: linear-gradient(135deg, #0b2b26, #1c4e3f);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .sub {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #5a6e7c;
+      margin-top: -8px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #e2e8f0;
+      display: inline-block;
+      width: auto;
+      padding-bottom: 6px;
+    }
+
+    .container {
+      max-width: 550px;
+      margin: 0 auto;
+      background: #ffffffcc;
+      border-radius: 32px;
+      padding: 8px 6px 20px 6px;
+      backdrop-filter: blur(0px);
+    }
+
+    /* card list style */
+    .item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: white;
+      padding: 12px 18px;
+      margin-bottom: 10px;
+      border-radius: 20px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.03);
+      transition: all 0.2s ease;
+      border: 1px solid #edf2f7;
+    }
+
+    .item:hover {
+      border-color: #cbd5e1;
+      box-shadow: 0 6px 12px -8px rgba(0, 0, 0, 0.1);
+    }
+
+    .flavor {
+      flex: 1;
+      font-weight: 600;
+      font-size: 1rem;
+      color: #1f3b4c;
+      letter-spacing: -0.2px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* small emoji vibe */
+    .flavor::before {
+      content: "💨";
+      font-size: 1rem;
+      opacity: 0.7;
+      margin-right: 6px;
+    }
+
+    input[type="number"] {
+      width: 88px;
+      text-align: center;
+      padding: 10px 6px;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 40px;
+      font-size: 16px;
+      font-weight: 500;
+      background-color: #fefefe;
+      transition: 0.2s;
+      font-family: monospace;
+      color: #0f2b35;
+    }
+
+    input[type="number"]:focus {
+      outline: none;
+      border-color: #2c7a5e;
+      box-shadow: 0 0 0 3px rgba(44, 122, 94, 0.2);
+      background-color: #fff;
+    }
+
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    input[type="number"] {
+      -moz-appearance: textfield;
+    }
+
+    .copy-area {
+      margin-top: 28px;
+      text-align: center;
+    }
+
+    button {
+      background: #1f5e4c;
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 60px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    button:hover {
+      background: #0e4a3a;
+      transform: scale(0.97);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    button:active {
+      background: #0a3a2e;
+    }
+
+    #result {
+      margin-top: 18px;
+      white-space: pre-wrap;
+      background: #f1f5f9;
+      padding: 14px 18px;
+      border-radius: 24px;
+      border-left: 5px solid #2c7a5e;
+      font-family: 'SF Mono', 'Menlo', monospace;
+      font-size: 0.85rem;
+      line-height: 1.45;
+      color: #1e293b;
+      text-align: left;
+      display: none;
+      word-break: break-word;
+      box-shadow: inset 0 1px 2px #00000008, 0 1px 2px #fff;
+    }
+
+    .footer-note {
+      text-align: center;
+      font-size: 0.7rem;
+      color: #8ba0ae;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 12px;
+      }
+      .item {
+        padding: 10px 14px;
+      }
+      .flavor {
+        font-size: 0.9rem;
+      }
+      input[type="number"] {
+        width: 75px;
+        padding: 8px 4px;
+      }
+      button {
+        padding: 12px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2>🧃 NASTY 16K</h2>
+  <div style="text-align: center;"><span class="sub">📦 Stok Cartridge / Pod</span></div>
+
+  <!-- Senarai perisa berdasarkan data baru: Nasty 16k -->
+  <div class="item"><div class="flavor">Solero Lime</div><input type="number" min="0" value="0" data-flavor="Solero Lime"></div>
+  <div class="item"><div class="flavor">Sparkling Watermelon</div><input type="number" min="0" value="0" data-flavor="Sparkling Watermelon"></div>
+  <div class="item"><div class="flavor">Lemon Rainbow Candy</div><input type="number" min="0" value="0" data-flavor="Lemon Rainbow Candy"></div>
+  <div class="item"><div class="flavor">Cushman</div><input type="number" min="0" value="0" data-flavor="Cushman"></div>
+  
+  <!-- nota: jika perlu tambah rasa lain? hanya 4 rasa seperti diminta, tapi kita ikut data tepat -->
+  <!-- pengalaman premium: cukup ringkas & fokus pada 4 varian Nasty 16k -->
+
+  <div class="copy-area">
+    <button onclick="copyToClipboard()">📋 Copy Stok ke Clipboard</button>
+    <div id="result"></div>
+  </div>
+  <div class="footer-note">✨ Masukkan kuantiti stok untuk setiap perisa. Tekan butang untuk salin ringkasan.</div>
+</div>
+
+<script>
+  function copyToClipboard() {
+    // ambil semua input yang mempunyai data-flavor
+    const inputs = document.querySelectorAll('input[type="number"][data-flavor]');
+    let text = "*Nasty 16k*\n";
+    let hasItem = false;
+    
+    inputs.forEach(input => {
+      let qty = input.value.trim();
+      const flavorRaw = input.getAttribute('data-flavor');
+      
+      // pastikan nilai integer & valid
+      let numericQty = 0;
+      if (qty !== "" && !isNaN(qty) && qty !== null) {
+        numericQty = parseInt(qty, 10);
+        if (isNaN(numericQty)) numericQty = 0;
+      } else {
+        numericQty = 0;
+      }
+      
+      // Jika kuantiti lebih besar dari 0 atau secara eksplisit nombor > 0
+      if (numericQty > 0) {
+        // Gunakan nama flavor yang konsisten seperti dalam data (dengan ruang yang bersih)
+        // Tapi kita boleh gunakan teks yang lebih kemas: untuk "Cush Man" pastikan ikut permintaan asal
+        let displayFlavor = flavorRaw;
+        // Optional: sedikit kemasan visual, tapi biar asli
+        text += `${displayFlavor} - ${numericQty}\n`;
+        hasItem = true;
+      }
+    });
+    
+    // jika tiada stok (semua kosong / 0)
+    if (!hasItem) {
+      text = "Tiada stok dimasukkan / semua 0";
+    }
+    
+    // salin ke clipboard
+    navigator.clipboard.writeText(text).then(() => {
+      const resultDiv = document.getElementById('result');
+      // Tunjukkan teks yang disalin dalam kotak result
+      resultDiv.textContent = text;
+      resultDiv.style.display = 'block';
+      
+      // Auto hilang selepas 8 saat
+      setTimeout(() => {
+        resultDiv.style.display = 'none';
+      }, 8000);
+    }).catch(err => {
+      alert("Gagal menyalin: " + err);
+      // fallback: tunjuk dalam result sekurangnya
+      const resultDiv = document.getElementById('result');
+      resultDiv.textContent = text;
+      resultDiv.style.display = 'block';
+      setTimeout(() => {
+        resultDiv.style.display = 'none';
+      }, 8000);
+    });
+  }
+  
+  // optional: tambah event listener untuk pastikan input hanya nombor (tapi html dah number)
+  // tiada perubahan lain diperlukan — berfungsi seamless
+  document.querySelectorAll('input[type="number"]').forEach(inp => {
+    inp.addEventListener('change', function() {
+      let val = parseInt(this.value, 10);
+      if (isNaN(val) || val < 0) {
+        this.value = 0;
+      }
+    });
+    inp.addEventListener('input', function() {
+      if (this.value === '' || this.value === '-') {
+        // biarkan kosong sementara, akan ditukar masa copy atau blur
+        return;
+      }
+      let num = parseInt(this.value, 10);
+      if (isNaN(num)) {
+        this.value = 0;
+      } else if (num < 0) {
+        this.value = 0;
+      }
+    });
+  });
+</script>
+</body>
+</html>
