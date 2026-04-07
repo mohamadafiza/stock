@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Swap Cartridge Stok - Sweet & Ice</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #f4f7fc;
+      margin: 0;
+      padding: 16px;
+      color: #1e2a3e;
+    }
+
+    .container {
+      max-width: 550px;
+      margin: 0 auto;
+    }
+
+    /* header */
+    .main-title {
+      text-align: center;
+      font-size: 1.7rem;
+      font-weight: 700;
+      margin: 0 0 6px 0;
+      color: #1e3c5c;
+      letter-spacing: -0.3px;
+    }
+
+    .sub {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #4a627a;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #dce5ec;
+      padding-bottom: 12px;
+    }
+
+    /* kategori kumpulan */
+    .group-card {
+      background: #ffffff;
+      border-radius: 20px;
+      margin-bottom: 24px;
+      padding: 12px 8px 12px 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: all 0.1s ease;
+    }
+
+    .group-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      padding: 4px 12px 8px 12px;
+      margin: 0 0 8px 0;
+      border-left: 5px solid;
+      background: #f9fafc;
+      border-radius: 14px;
+    }
+
+    .sweet-title {
+      border-left-color: #d45a7a;
+      color: #b13e5e;
+    }
+
+    .ice-title {
+      border-left-color: #3a86b0;
+      color: #1f5e7e;
+    }
+
+    /* item row */
+    .item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #ffffff;
+      padding: 10px 12px;
+      margin: 6px 4px;
+      border-radius: 14px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 0, 0, 0.05);
+      border: 1px solid #eef2f8;
+      transition: 0.1s;
+    }
+
+    .flavor {
+      flex: 1;
+      font-weight: 500;
+      font-size: 0.95rem;
+      letter-spacing: -0.2px;
+      color: #1f2f3f;
+      word-break: break-word;
+      padding-right: 8px;
+    }
+
+    input[type="number"] {
+      width: 85px;
+      text-align: center;
+      padding: 10px 6px;
+      border: 1px solid #cbdde9;
+      border-radius: 40px;
+      font-size: 15px;
+      font-weight: 500;
+      background: #fff;
+      transition: 0.2s;
+      font-family: monospace;
+    }
+
+    input[type="number"]:focus {
+      outline: none;
+      border-color: #2c7cb6;
+      box-shadow: 0 0 0 2px rgba(44,124,182,0.2);
+    }
+
+    /* butang & result */
+    .copy-area {
+      margin-top: 20px;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    button {
+      background: #1f6e43;
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      border-radius: 60px;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: background 0.2s, transform 0.05s;
+      width: 90%;
+      max-width: 280px;
+    }
+
+    button:active {
+      transform: scale(0.97);
+    }
+
+    button:hover {
+      background: #155a38;
+    }
+
+    #result {
+      margin-top: 20px;
+      white-space: pre-wrap;
+      background: #1e2a32;
+      color: #eef4ff;
+      padding: 14px;
+      border-radius: 20px;
+      border: 1px solid #bdd3e6;
+      font-family: 'SF Mono', 'Courier New', monospace;
+      font-size: 0.85rem;
+      display: none;
+      text-align: left;
+      word-break: break-word;
+      line-height: 1.45;
+    }
+
+    .footer-note {
+      font-size: 0.7rem;
+      text-align: center;
+      color: #7c8f9f;
+      margin-top: 12px;
+    }
+
+    @media (max-width: 480px) {
+      .item {
+        padding: 8px 10px;
+      }
+      .flavor {
+        font-size: 0.88rem;
+      }
+      input[type="number"] {
+        width: 75px;
+        font-size: 14px;
+      }
+      .group-title {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="main-title">🍬 Swap Cartridge</div>
+  <div class="sub">Stok Management | Sweet + Ice Series</div>
+
+  <!-- SWEET CARTRIDGE GROUP -->
+  <div class="group-card">
+    <div class="group-title sweet-title">🍭 Swap Sweet Cartridge</div>
+    <div id="sweet-list"></div>
+  </div>
+
+  <!-- ICE CARTRIDGE GROUP -->
+  <div class="group-card">
+    <div class="group-title ice-title">🧊 Swap Ice Cartridge</div>
+    <div id="ice-list"></div>
+  </div>
+
+  <div class="copy-area">
+    <button onclick="copyToClipboard()">📋 Copy Stok ke Clipboard</button>
+    <div id="result"></div>
+  </div>
+  <div class="footer-note">Masukkan kuantiti stok untuk setiap rasa → klik salin</div>
+</div>
+
+<script>
+  // ======================= DATA BARU (mengikut permintaan) =======================
+  // Sweet Cartridge list (mengikut turutan yang diberi)
+  const sweetFlavors = [
+    "Caramel Popcorn",
+    "Strawberry Watermelon",
+    "Strawberry Kiwi",
+    "Strawberry Mix Berries",
+    "Strawberry Milk",
+    "Sweet Pineapple",
+    "Strawberry Ice Cream",
+    "Strawberry Grape Apple",
+    "Watermelon Bubblegum",
+    "Honeydew Mix",
+    "Double Grape",
+    "Mango Mix",
+    "Strawberry Brust",
+    "Strawberry Cheese Cake",
+    "Solero Ice Cream",
+    "Apple Lychee",
+    "Orange Mango Guava",
+    "Strawberry Peach"
+  ];
+
+  // Ice Cartridge list
+  const iceFlavors = [
+    "Longjing Tea",
+    "Mineral Water",
+    "Double Mint",
+    "Grape Ice",
+    "Cola Ice",
+    "Jasmine Tea",
+    "Lemon Lime Ice",
+    "Grape Tie Guan Yin"
+  ];
+
+  // fungsi untuk membina senarai item + input dinamik (supaya mudah dikendalikan)
+  function buildList(containerId, flavorsArray, groupPrefix) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    container.innerHTML = '';
+    flavorsArray.forEach((flavor, idx) => {
+      const itemDiv = document.createElement('div');
+      itemDiv.className = 'item';
+      
+      const flavorSpan = document.createElement('div');
+      flavorSpan.className = 'flavor';
+      flavorSpan.textContent = flavor;
+      
+      const inputNum = document.createElement('input');
+      inputNum.type = 'number';
+      inputNum.min = '0';
+      inputNum.value = '0';
+      // simpan data-flavor dengan nama penuh, dan juga group untuk debugging (optional)
+      inputNum.setAttribute('data-flavor', flavor);
+      inputNum.setAttribute('data-group', groupPrefix);
+      // optional: step = 1
+      inputNum.step = '1';
+      
+      itemDiv.appendChild(flavorSpan);
+      itemDiv.appendChild(inputNum);
+      container.appendChild(itemDiv);
+    });
+  }
+
+  // bina kedua-dua senarai
+  buildList('sweet-list', sweetFlavors, 'sweet');
+  buildList('ice-list', iceFlavors, 'ice');
+
+  // fungsi copy ke clipboard (gaya sama seperti contoh asal, tapi format *Swap Sweet Cartridge* + *Swap Ice Cartridge*)
+  function copyToClipboard() {
+    // ambil semua input number dalam kedua-dua kumpulan
+    const allInputs = document.querySelectorAll('input[type="number"]');
+    
+    // kita akan bina dua bahagian: Sweet Cartridge dan Ice Cartridge
+    let sweetLines = [];
+    let iceLines = [];
+    
+    // iterate setiap input
+    allInputs.forEach(input => {
+      const qty = input.value.trim();
+      const flavor = input.getAttribute('data-flavor');
+      // validation: qty mesti bukan kosong, bukan 0, integer sah
+      if (qty !== "" && qty !== "0" && !isNaN(qty) && Number(qty) > 0) {
+        // kena bezakan sama ada rasa tergolong dalam sweet atau ice?
+        // cara mudah: semak sama ada flavor dalam senarai sweetFlavors atau iceFlavors
+        if (sweetFlavors.includes(flavor)) {
+          sweetLines.push(`${flavor} - ${qty}`);
+        } else if (iceFlavors.includes(flavor)) {
+          iceLines.push(`${flavor} - ${qty}`);
+        } else {
+          // fallback (sepatutnya tak berlaku)
+          // tapi jika terjadi, masukkan dalam 'lain-lain' (optional)
+          // abaikan atau letak sekali
+        }
+      }
+    });
+    
+    // bina teks akhir dengan format mengikut kehendak:
+    let finalText = "";
+    let hasAnyStock = (sweetLines.length > 0 || iceLines.length > 0);
+    
+    if (!hasAnyStock) {
+      finalText = "Tiada stok dimasukkan / semua 0";
+    } else {
+      // jika ada sweet stock
+      if (sweetLines.length > 0) {
+        finalText += "*Swap Sweet Cartridge*\n";
+        finalText += sweetLines.join('\n');
+        finalText += "\n\n";   // tambah dua baris baru untuk pisah (rapi)
+      }
+      // jika ada ice stock
+      if (iceLines.length > 0) {
+        finalText += "*Swap Ice Cartridge*\n";
+        finalText += iceLines.join('\n');
+        // tak perlu newline tambahan di hujung, tapi ok
+      }
+      // trim newline yang berlebihan di hujung jika perlu
+      finalText = finalText.trimEnd();
+    }
+    
+    // copy ke clipboard
+    navigator.clipboard.writeText(finalText).then(() => {
+      const resultDiv = document.getElementById('result');
+      // paparkan preview teks yang disalin
+      resultDiv.textContent = finalText;
+      resultDiv.style.display = 'block';
+      // auto hide selepas 7 saat
+      setTimeout(() => {
+        resultDiv.style.display = 'none';
+      }, 7000);
+    }).catch(err => {
+      alert("Gagal menyalin stok: " + err);
+      console.error(err);
+    });
+  }
+  
+  // optional: tambah event untuk 'Enter' atau lain-lain, tapi tidak diperlukan.
+  // Sedia ada juga fungsi untuk pastikan input tidak negatif melalui min=0
+  // Selesai.
+</script>
+</body>
+</html>
+```
