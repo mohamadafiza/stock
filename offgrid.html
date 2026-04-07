@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Offgrid Liquid 15ml - Stok</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #f8f9fc;
+      margin: 0;
+      padding: 16px;
+      color: #1e2a3a;
+    }
+
+    h2 {
+      text-align: center;
+      margin: 0 0 8px 0;
+      font-weight: 600;
+      font-size: 1.7rem;
+      color: #1e466e;
+      letter-spacing: -0.2px;
+    }
+
+    .subhead {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #2c6e9e;
+      background: #eef2fa;
+      display: inline-block;
+      width: auto;
+      margin: 0 auto 20px;
+      padding: 6px 14px;
+      border-radius: 40px;
+      font-weight: 500;
+    }
+
+    .container {
+      max-width: 650px;
+      margin: 0 auto;
+      background: transparent;
+    }
+
+    /* modern card style */
+    .item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: white;
+      padding: 10px 16px;
+      margin-bottom: 8px;
+      border-radius: 14px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.05);
+      transition: all 0.15s ease;
+      border: 1px solid #eef2f8;
+    }
+
+    .item:hover {
+      border-color: #cbdde9;
+      background: #ffffff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+    }
+
+    .flavor {
+      flex: 1;
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: #1f3b4c;
+      letter-spacing: -0.2px;
+      padding-right: 8px;
+    }
+
+    input[type="number"] {
+      width: 90px;
+      text-align: center;
+      padding: 8px 6px;
+      border: 1px solid #cbdde6;
+      border-radius: 40px;
+      font-size: 15px;
+      font-weight: 500;
+      background: #fff;
+      transition: 0.1s;
+      color: #0a2f44;
+    }
+
+    input[type="number"]:focus {
+      outline: none;
+      border-color: #2c7cb6;
+      box-shadow: 0 0 0 2px rgba(44, 124, 182, 0.2);
+    }
+
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    input[type="number"] {
+      -moz-appearance: textfield;
+    }
+
+    .copy-area {
+      margin-top: 28px;
+      text-align: center;
+    }
+
+    button {
+      background: #1c6f3c;
+      color: white;
+      border: none;
+      padding: 14px 32px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 60px;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: 0.2s;
+      width: 100%;
+      max-width: 280px;
+      letter-spacing: 0.3px;
+    }
+
+    button:hover {
+      background: #0f5a31;
+      transform: scale(0.98);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    #result {
+      margin-top: 20px;
+      white-space: pre-wrap;
+      background: #ffffffef;
+      padding: 16px;
+      border-radius: 20px;
+      border: 1px solid #cde0ed;
+      font-family: 'SF Mono', 'Menlo', monospace;
+      font-size: 13px;
+      line-height: 1.5;
+      text-align: left;
+      color: #1e3a4d;
+      display: none;
+      box-shadow: 0 5px 12px rgba(0,0,0,0.03);
+    }
+
+    .header-badge {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    hr {
+      margin: 8px 0 18px;
+      border: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #c0d4e6, transparent);
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="header-badge">
+    <h2>🥤 Offgrid Liquid 15ml</h2>
+    <div class="subhead">RM23 / botol · Kemaskini stok</div>
+  </div>
+  
+  <!-- Semua 28 perisa berdasarkan senarai baru -->
+  <div class="item"><div class="flavor">Kiwi Mango Watermelon</div><input type="number" min="0" data-flavor="Kiwi Mango Watermelon"></div>
+  <div class="item"><div class="flavor">Mango Pineapple</div><input type="number" min="0" data-flavor="Mango Pineapple"></div>
+  <div class="item"><div class="flavor">Pineapple Berry</div><input type="number" min="0" data-flavor="Pineapple Berry"></div>
+  <div class="item"><div class="flavor">Pineapple Apple</div><input type="number" min="0" data-flavor="Pineapple Apple"></div>
+  <div class="item"><div class="flavor">Watermelon</div><input type="number" min="0" data-flavor="Watermelon"></div>
+  <div class="item"><div class="flavor">Apple Grape</div><input type="number" min="0" data-flavor="Apple Grape"></div>
+  <div class="item"><div class="flavor">Apple (Double Apple)</div><input type="number" min="0" data-flavor="Apple (Double Apple)"></div>
+  <div class="item"><div class="flavor">Grape (Double Grape)</div><input type="number" min="0" data-flavor="Grape (Double Grape)"></div>
+  <div class="item"><div class="flavor">Blackcurrant Berries</div><input type="number" min="0" data-flavor="Blackcurrant Berries"></div>
+  <div class="item"><div class="flavor">Blackcurrant Lychee (Ribena Lychee)</div><input type="number" min="0" data-flavor="Blackcurrant Lychee (Ribena Lychee)"></div>
+  <div class="item"><div class="flavor">Blackcurrant (Blackcurrant Yogurt)</div><input type="number" min="0" data-flavor="Blackcurrant (Blackcurrant Yogurt)"></div>
+  <div class="item"><div class="flavor">Berries (Berries Yogurt)</div><input type="number" min="0" data-flavor="Berries (Berries Yogurt)"></div>
+  <div class="item"><div class="flavor">Cranberry Lychee</div><input type="number" min="0" data-flavor="Cranberry Lychee"></div>
+  <div class="item"><div class="flavor">Honeydew Grape</div><input type="number" min="0" data-flavor="Honeydew Grape"></div>
+  <div class="item"><div class="flavor">Honeydew Lime (Honeydew Slurpee)</div><input type="number" min="0" data-flavor="Honeydew Lime (Honeydew Slurpee)"></div>
+  <div class="item"><div class="flavor">Honeydew Lemon</div><input type="number" min="0" data-flavor="Honeydew Lemon"></div>
+  <div class="item"><div class="flavor">Honeydew Pineapple</div><input type="number" min="0" data-flavor="Honeydew Pineapple"></div>
+  <div class="item"><div class="flavor">Lychee Raspberry</div><input type="number" min="0" data-flavor="Lychee Raspberry"></div>
+  <div class="item"><div class="flavor">Mango Blackcurrant</div><input type="number" min="0" data-flavor="Mango Blackcurrant"></div>
+  <div class="item"><div class="flavor">Mango Lime (Mango Slurpee)</div><input type="number" min="0" data-flavor="Mango Lime (Mango Slurpee)"></div>
+  <div class="item"><div class="flavor">Mango (Mango Mix)</div><input type="number" min="0" data-flavor="Mango (Mango Mix)"></div>
+  <div class="item"><div class="flavor">Peach Strawberry</div><input type="number" min="0" data-flavor="Peach Strawberry"></div>
+  <div class="item"><div class="flavor">Pineapple Blackcurrant</div><input type="number" min="0" data-flavor="Pineapple Blackcurrant"></div>
+  <div class="item"><div class="flavor">Strawberry Grape Apple</div><input type="number" min="0" data-flavor="Strawberry Grape Apple"></div>
+  <div class="item"><div class="flavor">Strawberry Blackcurrant</div><input type="number" min="0" data-flavor="Strawberry Blackcurrant"></div>
+  <div class="item"><div class="flavor">Strawberry (Strawberry Burst)</div><input type="number" min="0" data-flavor="Strawberry (Strawberry Burst)"></div>
+  <div class="item"><div class="flavor">Taro Vanilla (Keladi Ice Cream)</div><input type="number" min="0" data-flavor="Taro Vanilla (Keladi Ice Cream)"></div>
+  <div class="item"><div class="flavor">Watermelon Lychee</div><input type="number" min="0" data-flavor="Watermelon Lychee"></div>
+  
+  <div class="copy-area">
+    <button onclick="copyToClipboard()">📋 Copy Stok ke Clipboard</button>
+    <div id="result"></div>
+  </div>
+</div>
+
+<script>
+  function copyToClipboard() {
+    // Dapatkan semua input quantity
+    const inputs = document.querySelectorAll('input[type="number"]');
+    let textLines = [];
+    
+    // Header deskriptif ringkas (macam gaya asal tapi disesuaikan)
+    let header = "*Offgrid Liquid 15ml*\n";
+    let footer = "";
+    
+    let hasAnyStock = false;
+    
+    // Loop setiap item
+    inputs.forEach(input => {
+      let qtyRaw = input.value.trim();
+      let qty = parseInt(qtyRaw, 10);
+      const flavor = input.getAttribute('data-flavor');
+      
+      // validasi: bukan NaN dan lebih dari 0 (hanya sertakan stok >0)
+      if (!isNaN(qty) && qty !== "" && qty !== null && qty > 0) {
+        textLines.push(`${flavor} - ${qty}`);
+        hasAnyStock = true;
+      }
+    });
+    
+    let finalText = "";
+    if (!hasAnyStock) {
+      finalText = "Tiada stok dimasukkan / semua botol 0";
+    } else {
+      finalText = header + textLines.join("\n") + footer;
+    }
+    
+    // Copy ke clipboard
+    navigator.clipboard.writeText(finalText).then(() => {
+      const resultDiv = document.getElementById('result');
+      // Tampilkan preview teks yang akan disalin (supaya pengguna nampak)
+      resultDiv.textContent = finalText;
+      resultDiv.style.display = 'block';
+      
+      // Auto hilang selepas 7 saat
+      setTimeout(() => {
+        resultDiv.style.display = 'none';
+      }, 7000);
+    }).catch(err => {
+      alert("Gagal menyalin: " + err);
+      console.error("Clipboard error:", err);
+    });
+  }
+  
+  // Optional: tambah sedikit interaksi supaya user boleh tekan enter atau increment default 
+  // tidak mengganggu fungsi utama, semua input sudah sedia ada.
+  // Untuk pengalaman lebih baik, kita boleh set value default "0" jika kosong tapi biarkan kosong pun okay.
+  // Namun untuk user friendly, jika input kosong kita set 0 secara visual? tidak perlu, tetapi kita handling parsing NaN.
+  // Selesai.
+</script>
+</body>
+</html>
