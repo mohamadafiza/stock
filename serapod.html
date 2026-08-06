@@ -2,349 +2,205 @@
 <html lang="ms">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Serapod Cartridge · Senarai Rasa Baharu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Stok Perisa - Serapod</title>
   <style>
     * {
       box-sizing: border-box;
     }
-
     body {
-      font-family: system-ui, -apple-system, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
-      background: #f8f9fc;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f5f5f5;
       margin: 0;
-      padding: 20px 12px 40px;
-      color: #1a2c3e;
+      padding: 15px;
+      color: #222;
     }
-
-    .container {
-      max-width: 620px;
-      margin: 0 auto;
-      background: white;
-      border-radius: 32px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05), 0 2px 6px rgba(0, 0, 0, 0.03);
-      overflow: hidden;
-      padding: 20px 18px 28px;
-    }
-
-    h1 {
-      font-size: 1.9rem;
-      font-weight: 700;
-      margin: 0 0 6px 0;
+    h2 {
+      text-align: center;
+      margin: 10px 0 18px 0;
+      font-weight: 600;
+      font-size: 1.6rem;
+      color: #1e293b;
       letter-spacing: -0.3px;
-      background: linear-gradient(135deg, #2b7a3e, #f9a602);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
+    }
+    .container {
+      max-width: 540px;
+      margin: 0 auto;
+    }
+    .category {
+      background: #dce3ed;
+      padding: 8px 18px;
+      margin: 24px 0 12px 0;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #0b2b44;
       display: inline-block;
+      letter-spacing: 0.3px;
     }
-
-    .subhead {
-      font-size: 0.85rem;
-      color: #5e6f8d;
-      border-left: 3px solid #f9a602;
-      padding-left: 12px;
-      margin: 8px 0 18px 0;
-      font-weight: 450;
-    }
-
-    .grid-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin: 16px 0 24px;
-    }
-
-    .item-card {
-      background: #ffffff;
-      border-radius: 20px;
+    .item {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 8px 14px 8px 18px;
-      transition: all 0.2s;
-      border: 1px solid #eef2f9;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+      background: white;
+      padding: 12px 16px;
+      margin-bottom: 8px;
+      border-radius: 14px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+      border: 1px solid #eef2f6;
+      transition: 0.1s ease;
     }
-
-    .item-card:hover {
-      border-color: #ffdd99;
-      background: #fffef7;
+    .item:hover {
+      border-color: #b9c8dd;
+      background: #fafcff;
     }
-
-    .flavor-name {
-      font-weight: 600;
-      font-size: 1rem;
-      color: #1e2f41;
-      letter-spacing: -0.2px;
-      word-break: break-word;
-      padding-right: 12px;
+    .flavor {
       flex: 1;
-    }
-
-    .stock-input {
-      width: 96px;
-      text-align: center;
-      padding: 10px 6px;
-      border: 1.5px solid #e2e8f0;
-      border-radius: 40px;
-      font-size: 1rem;
       font-weight: 500;
-      background: #ffffff;
-      transition: 0.2s;
-      font-family: monospace;
+      font-size: 0.98rem;
+      color: #1e293b;
+      padding-right: 8px;
     }
-
-    .stock-input:focus {
-      outline: none;
-      border-color: #f9a602;
-      box-shadow: 0 0 0 3px rgba(249,166,2,0.2);
-    }
-
-    .copy-area {
-      margin-top: 12px;
+    input[type="number"] {
+      width: 76px;
       text-align: center;
-      border-top: 1px solid #ecf3fa;
-      padding-top: 24px;
+      padding: 8px 4px;
+      border: 1px solid #d0d9e6;
+      border-radius: 10px;
+      font-size: 16px;
+      background: #ffffff;
+      transition: 0.15s;
+      font-weight: 500;
+      color: #0b1f33;
     }
-
-    .btn-copy {
-      background: #1e6f3f;
+    input[type="number"]:focus {
+      outline: none;
+      border-color: #3b7cbf;
+      box-shadow: 0 0 0 3px rgba(44, 110, 203, 0.15);
+    }
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    input[type="number"] {
+      -moz-appearance: textfield;
+    }
+    .copy-area {
+      margin-top: 30px;
+      text-align: center;
+    }
+    button {
+      background: #1a4b7a;
       color: white;
       border: none;
-      padding: 14px 26px;
-      font-size: 1rem;
+      padding: 15px 34px;
+      font-size: 1.1rem;
       font-weight: 600;
-      border-radius: 60px;
+      border-radius: 40px;
       cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.2s;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 8px rgba(0, 40, 80, 0.12);
+      transition: all 0.15s;
+      letter-spacing: 0.4px;
     }
-
-    .btn-copy:hover {
-      background: #0f5a34;
-      transform: scale(0.98);
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    button:hover {
+      background: #0d3a60;
+      transform: scale(1.01);
+      box-shadow: 0 6px 14px rgba(0, 40, 80, 0.2);
     }
-
-    .result-preview {
-      background: #f1f5f9;
+    button:active {
+      transform: scale(0.97);
+    }
+    #result {
       margin-top: 20px;
-      padding: 14px 18px;
-      border-radius: 24px;
-      font-size: 0.85rem;
-      font-family: 'SF Mono', 'Menlo', monospace;
       white-space: pre-wrap;
-      word-break: break-word;
-      text-align: left;
-      color: #1e2f3c;
-      border: 1px solid #e2edf2;
+      background: #ffffff;
+      padding: 16px 18px;
+      border-radius: 16px;
+      border: 1px solid #dce3ed;
+      min-height: 70px;
       display: none;
-      max-height: 280px;
-      overflow-y: auto;
+      text-align: left;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #0b2b44;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
     }
-
-    .toast-message {
-      background: #1e2f3c;
-      color: #ffecb3;
-      border-radius: 100px;
-      padding: 6px 14px;
-      font-size: 0.75rem;
-      display: inline-block;
-      margin-top: 12px;
-    }
-
     .footer-note {
-      font-size: 0.7rem;
+      margin-top: 16px;
+      font-size: 0.8rem;
+      color: #6c7e94;
       text-align: center;
-      margin-top: 22px;
-      color: #7c8ba0;
-    }
-
-    @media (max-width: 480px) {
-      .container {
-        padding: 16px;
-      }
-      .flavor-name {
-        font-size: 0.9rem;
-      }
-      .stock-input {
-        width: 80px;
-        padding: 8px 4px;
-      }
     }
   </style>
 </head>
 <body>
 <div class="container">
-  <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap;">
-    <div>
-      <h1>🍃 Serapod Cartridge</h1>
-      <div class="subhead">✦ Cellera ✦</div>
-    </div>
-  </div>
+  <h2>Serapod</h2>
   
-  <!-- SEMUA RASA dari senarai baru (atas) ganti terus yang lama -->
-  <div class="grid-list" id="flavorListContainer"></div>
+  <div class="category">🍭 Serapod</div>
+  
+  <div class="item"><div class="flavor">Double Mango (Mango)</div><input type="number" min="0" data-flavor="Double Mango (Mango)"></div>
+  <div class="item"><div class="flavor">Grape (Mix Grape)</div><input type="number" min="0" data-flavor="Grape (Mix Grape)"></div>
+  <div class="item"><div class="flavor">Grape Pink (Grape Bubblegum)</div><input type="number" min="0" data-flavor="Grape Pink (Grape Bubblegum)"></div>
+  <div class="item"><div class="flavor">Guava</div><input type="number" min="0" data-flavor="Guava"></div>
+  <div class="item"><div class="flavor">Honeydew</div><input type="number" min="0" data-flavor="Honeydew"></div>
+  <div class="item"><div class="flavor">Keladi Cheese</div><input type="number" min="0" data-flavor="Keladi Cheese"></div>
+  <div class="item"><div class="flavor">Spearmint (Pudina)</div><input type="number" min="0" data-flavor="Spearmint (Pudina)"></div>
+  <div class="item"><div class="flavor">Lychee Blackcurrant</div><input type="number" min="0" data-flavor="Lychee Blackcurrant"></div>
+  <div class="item"><div class="flavor">Mango Smoothie (Mango Vanilla)</div><input type="number" min="0" data-flavor="Mango Smoothie (Mango Vanilla)"></div>
+  <div class="item"><div class="flavor">Oat Classic (Vanilla Brown)</div><input type="number" min="0" data-flavor="Oat Classic (Vanilla Brown)"></div>
+  <div class="item"><div class="flavor">Strawberry Cheesecake (Strawberry Yellow)</div><input type="number" min="0" data-flavor="Strawberry Cheesecake (Strawberry Yellow)"></div>
+  <div class="item"><div class="flavor">Strawberry Bubblegum (Strawberry Pudina)</div><input type="number" min="0" data-flavor="Strawberry Bubblegum (Strawberry Pudina)"></div>
+  <div class="item"><div class="flavor">Vanilla Custard (Vanilla Berry)</div><input type="number" min="0" data-flavor="Vanilla Custard (Vanilla Berry)"></div>
+  <div class="item"><div class="flavor">Vanilla Tobacco</div><input type="number" min="0" data-flavor="Vanilla Tobacco"></div>
+  <div class="item"><div class="flavor">Teh</div><input type="number" min="0" data-flavor="Teh"></div>
+  <div class="item"><div class="flavor">Jagung</div><input type="number" min="0" data-flavor="Jagung"></div>
+  <div class="item"><div class="flavor">Kelapa</div><input type="number" min="0" data-flavor="Kelapa"></div>
+  <div class="item"><div class="flavor">Orange</div><input type="number" min="0" data-flavor="Orange"></div>
+  <div class="item"><div class="flavor">Banana Milk (Banana Vanilla)</div><input type="number" min="0" data-flavor="Banana Milk (Banana Vanilla)"></div>
+  <div class="item"><div class="flavor">Butterscotch (Corn Vanilla)</div><input type="number" min="0" data-flavor="Butterscotch (Corn Vanilla)"></div>
+  <div class="item"><div class="flavor">Cultured Milk (Barley)</div><input type="number" min="0" data-flavor="Cultured Milk (Barley)"></div>
+  <div class="item"><div class="flavor">Coffee (Hazelnut)</div><input type="number" min="0" data-flavor="Coffee (Hazelnut)"></div>
 
   <div class="copy-area">
-    <button class="btn-copy" id="copyBtn">📋 Copy Stok ke Clipboard</button>
-    <div id="resultPreview" class="result-preview"></div>
+    <button onclick="copyToClipboard()">📋 Copy Stok</button>
+    <div id="result"></div>
   </div>
-  <div class="footer-note">
-    ✅ Masukkan kuantiti stok → klik salin → siap
-  </div>
+  <div class="footer-note">✏️ Isi kuantiti, kemudian tekan copy. Stok sifar atau kosong akan diabaikan.</div>
 </div>
 
 <script>
-  // ------------------------------------------------------------------
-  // SENARAI RASA BAHARU (menggantikan senarai bawah yang lama)
-  // berdasarkan data dari "Mango (Double Mango) ... Vanilla Tobacco"
-  // disusun kemas, nama standard untuk paparan mesra & export.
-  // ------------------------------------------------------------------
-  const FLAVORS_LIST = [
-    { display: "Double Mango", key: "Double Mango" },
-    { display: "Mango Smoothie", key: "Mango Smoothie" },      // asal Mango Vanilla (Mango Smoothie)
-    { display: "Guava", key: "Guava" },
-    { display: "Lychee Blackcurrant", key: "Lychee Blackcurrant" },
-    { display: "Cranberry Lychee", key: "Cranberry Lychee" },
-    { display: "Mix Grape", key: "Mix Grape" },                // Grape (Mix Grape)
-    { display: "Grape Bubblegum", key: "Grape Bubblegum" },    // Grape Pudina / Grape Pink / Bubblegum
-    { display: "Honeydew", key: "Honeydew" },
-    { display: "Spearmint", key: "Spearmint" },                // Pudina (Spearmint)
-    { display: "Strawberry Bubblegum", key: "Strawberry Bubblegum" }, // Strawberry Pudina (Strawberry Pink / Bubblegum)
-    { display: "Orange", key: "Orange" },
-    { display: "Keladi Cheese", key: "Keladi Cheese" },         // Keladi (Keladi Cheese)
-    { display: "Jagung", key: "Jagung" },                       // Jagung (original corn)
-    { display: "Kelapa", key: "Kelapa" },                       // Kelapa asli
-    { display: "Cultured Milk", key: "Cultured Milk" },         // Barley (Vanilla White / Culture Milk / Yakult) -> ambil Cultured Milk
-    { display: "Strawberry Cheesecake", key: "Strawberry Cheesecake" }, // Strawberry Corn (Strawberry Yellow / Cheesecake)
-    { display: "Banana Milk", key: "Banana Milk" },             // Banana Vanilla (Banana Milk)
-    { display: "Coffee Hazelnut", key: "Coffee Hazelnut" },     // Hazelnut (Coffee Hazelnut)
-    { display: "Oat Classic", key: "Oat Classic" },             // Corn Vanilla (Brown / Oat Classic)
-    { display: "Vanilla Custard", key: "Vanilla Custard" },     // Vanilla Berry (Purple / Vanilla Custard)
-    { display: "Butterscotch Cream", key: "Butterscotch Cream" }, // Corn Vanilla (Yellow / Butterscotch)
-    { display: "Vanilla Tobacco", key: "Vanilla Tobacco" }
-  ];
+function copyToClipboard() {
+  const inputs = document.querySelectorAll('input[type="number"]');
+  let text = "*Serapod*\n";
+  let hasItem = false;
 
-  // Pastikan tiada flavor yang tertinggal dari senarai asal "semua atas" 
-  // (Double Mango, Mango Smoothie, Guava, Lychee Blackcurrant, Cranberry Lychee, Mix Grape,
-  // Grape Bubblegum, Honeydew, Spearmint, Strawberry Bubblegum, Orange, Keladi Cheese, Jagung,
-  // Kelapa, Cultured Milk, Strawberry Cheesecake, Banana Milk, Coffee Hazelnut, Oat Classic,
-  // Vanilla Custard, Butterscotch Cream, Vanilla Tobacco) ✅
-
-  // Simpan rujukan ke input elements
-  let inputElementsMap = new Map(); // key -> input DOM
-
-  function buildUI() {
-    const container = document.getElementById('flavorListContainer');
-    if (!container) return;
-    container.innerHTML = '';
-    FLAVORS_LIST.forEach((flavorObj, idx) => {
-      const displayName = flavorObj.display;
-      const dataKey = flavorObj.key;
-      
-      const itemDiv = document.createElement('div');
-      itemDiv.className = 'item-card';
-      
-      const nameSpan = document.createElement('span');
-      nameSpan.className = 'flavor-name';
-      nameSpan.innerText = displayName;
-      
-      const inputField = document.createElement('input');
-      inputField.type = 'number';
-      inputField.min = '0';
-      inputField.value = '0';
-      inputField.step = '1';
-      inputField.classList.add('stock-input');
-      inputField.setAttribute('data-flavor-key', dataKey);
-      inputField.setAttribute('data-flavor-display', displayName);
-      inputField.placeholder = '0';
-      
-      // event untuk prevent negatif dan kosong
-      inputField.addEventListener('change', function(e) {
-        let val = parseInt(this.value);
-        if (isNaN(val) || val < 0) this.value = 0;
-        else this.value = val;
-      });
-      inputField.addEventListener('input', function(e) {
-        let val = parseInt(this.value);
-        if (isNaN(val)) this.value = '';
-      });
-      
-      itemDiv.appendChild(nameSpan);
-      itemDiv.appendChild(inputField);
-      container.appendChild(itemDiv);
-      
-      // simpan dalam map untuk akses semasa copy
-      inputElementsMap.set(dataKey, inputField);
-    });
-  }
-
-  // Fungsi untuk generate teks stok berdasarkan kuantiti > 0
-  function generateStockText() {
-    let lines = [];
-    for (let flavor of FLAVORS_LIST) {
-      const inputEl = inputElementsMap.get(flavor.key);
-      if (!inputEl) continue;
-      let qty = inputEl.value.trim();
-      if (qty === "" || qty === null) qty = "0";
-      let numericQty = parseInt(qty, 10);
-      if (isNaN(numericQty)) numericQty = 0;
-      if (numericQty > 0) {
-        // format ikut display name yang bersih
-        lines.push(`${flavor.display} - ${numericQty}`);
-      }
-    }
-    if (lines.length === 0) {
-      return "*Serapod Cartridge*\nTiada stok dimasukkan / semua sifar.";
-    }
-    return "*Serapod Cartridge*\n" + lines.join('\n');
-  }
-
-  // Copy to clipboard & preview
-  async function copyToClipboardHandler() {
-    const stockText = generateStockText();
-    try {
-      await navigator.clipboard.writeText(stockText);
-      // preview sementara
-      const previewDiv = document.getElementById('resultPreview');
-      if (previewDiv) {
-        previewDiv.style.display = 'block';
-        previewDiv.textContent = stockText;
-        // auto hilang selepas 7 saat
-        setTimeout(() => {
-          previewDiv.style.display = 'none';
-        }, 7000);
-      }
-      // feedback optional (toast kecil)
-      const btn = document.getElementById('copyBtn');
-      const originalText = btn.innerText;
-      btn.innerText = '✅ Disalin!';
-      setTimeout(() => {
-        btn.innerText = originalText;
-      }, 1800);
-    } catch (err) {
-      console.warn('copy error', err);
-      alert('Gagal menyalin: ' + err);
+  for (let input of inputs) {
+    const qty = input.value.trim();
+    const flavor = input.getAttribute('data-flavor');
+    if (qty !== "" && qty !== "0" && !isNaN(qty) && Number(qty) > 0) {
+      text += `${flavor} - ${qty}\n`;
+      hasItem = true;
     }
   }
 
-  // init page
-  function init() {
-    buildUI();
-    const copyBtn = document.getElementById('copyBtn');
-    if (copyBtn) {
-      copyBtn.addEventListener('click', copyToClipboardHandler);
-    }
-    // optional: tambah default untuk tunjuk contoh? tapi biar semua 0
-    // selesai
+  if (!hasItem) {
+    text = "Tiada stok dimasukkan / semua 0";
   }
 
-  init();
+  navigator.clipboard.writeText(text).then(() => {
+    const resultDiv = document.getElementById('result');
+    resultDiv.textContent = text;
+    resultDiv.style.display = 'block';
+    clearTimeout(window.resultTimeout);
+    window.resultTimeout = setTimeout(() => {
+      resultDiv.style.display = 'none';
+    }, 9000);
+  }).catch(err => {
+    alert("Gagal copy: " + err);
+  });
+}
 </script>
 </body>
 </html>
