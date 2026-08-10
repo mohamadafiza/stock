@@ -91,7 +91,7 @@
   <div class="category">🍭 Kohs / Syokbar Flavors</div>
   <div class="item"><div class="flavor">Vanilla Lime (Solero Lime)</div><input type="number" min="0" data-flavor="Vanilla Lime (Solero Lime)"></div>
   <div class="item"><div class="flavor">Teh (Teh Tarik Ice)</div><input type="number" min="0" data-flavor="Teh (Teh Tarik Ice)"></div>
-  <div class="item"><div class="flavor">Starfruit / Calamansi (EnergyDrink/Redbull)</div><input type="number" min="0" data-flavor="Starfruit / Calamansi (EnergyDrink/Redbull)"></div>
+  <div class="item"><div class="flavor">Starfruit (Redbull)</div><input type="number" min="0" data-flavor="Starfruit / Calamansi (EnergyDrink/Redbull)"></div>
   <div class="item"><div class="flavor">Strawberry Apple</div><input type="number" min="0" data-flavor="Strawberry Apple"></div>
   <div class="item"><div class="flavor">Orange Pineapple</div><input type="number" min="0" data-flavor="Orange Pineapple"></div>
   <div class="item"><div class="flavor">Banana Vanilla (Banana Milkshake)</div><input type="number" min="0" data-flavor="Banana Vanilla (Banana Milkshake)"></div>
@@ -104,14 +104,19 @@
   <div class="item"><div class="flavor">Mango Vanilla (Mango Ice Cream)</div><input type="number" min="0" data-flavor="Mango Vanilla (Mango Ice Cream)"></div>
   <div class="item"><div class="flavor">Lemon (Ice Lemon Tea)</div><input type="number" min="0" data-flavor="Lemon (Ice Lemon Tea)"></div>
   <div class="item"><div class="flavor">Apple Plum</div><input type="number" min="0" data-flavor="Apple Plum"></div>
+  
+  <!-- New Syokbar flavours -->
+  <div class="item"><div class="flavor">Strawberry Lychee</div><input type="number" min="0" data-flavor="Strawberry Lychee"></div>
+  <div class="item"><div class="flavor">Mango Peach</div><input type="number" min="0" data-flavor="Mango Peach"></div>
+  <div class="item"><div class="flavor">Guava</div><input type="number" min="0" data-flavor="Guava"></div>
 
   <div class="category">⚡ Fuselab Flavors</div>
   <div class="item"><div class="flavor">Mango</div><input type="number" min="0" data-flavor="Mango"></div>
   <div class="item"><div class="flavor">Honeydew</div><input type="number" min="0" data-flavor="Honeydew"></div>
   <div class="item"><div class="flavor">Watermelon Berry</div><input type="number" min="0" data-flavor="Watermelon Berry"></div>
   <div class="item"><div class="flavor">Orange Mango Pineapple</div><input type="number" min="0" data-flavor="Orange Mango Pineapple"></div>
-  <div class="item"><div class="flavor">Grapefruit / Yuzu (Hundred Plus)</div><input type="number" min="0" data-flavor="Grapefruit / Yuzu (Hundred Plus)"></div>
-  <div class="item"><div class="flavor">LemonCherry / Cherimoya (Sour Bubblegum)</div><input type="number" min="0" data-flavor="LemonCherry / Cherimoya (Sour Bubblegum)"></div>
+  <div class="item"><div class="flavor">Grapefruit (Hundred+)</div><input type="number" min="0" data-flavor="Grapefruit / Yuzu (Hundred Plus)"></div>
+  <div class="item"><div class="flavor">Lemon Cherry (Sour Bubblegum)</div><input type="number" min="0" data-flavor="LemonCherry / Cherimoya (Sour Bubblegum)"></div>
   <div class="item"><div class="flavor">Vanilla Taro (Taro Ice Cream)</div><input type="number" min="0" data-flavor="Vanilla Taro (Taro Ice Cream)"></div>
   <div class="item"><div class="flavor">Blackcurrant Lychee (Rybena Lychee)</div><input type="number" min="0" data-flavor="Blackcurrant Lychee (Rybena Lychee)"></div>
   <div class="item"><div class="flavor">Vanilla Corn (Caramel Corn Pudding)</div><input type="number" min="0" data-flavor="Vanilla Corn (Caramel Corn Pudding)"></div>
@@ -122,6 +127,11 @@
   <div class="item"><div class="flavor">Kiwi Mango Watermelon</div><input type="number" min="0" data-flavor="Kiwi Mango Watermelon"></div>
   <div class="item"><div class="flavor">Strawberry Grape Apple</div><input type="number" min="0" data-flavor="Strawberry Grape Apple"></div>
   
+  <!-- New Fuselab flavours -->
+  <div class="item"><div class="flavor">Strawberry</div><input type="number" min="0" data-flavor="Strawberry"></div>
+  <div class="item"><div class="flavor">Blackcurrant Vanilla</div><input type="number" min="0" data-flavor="Blackcurrant Vanilla"></div>
+  <div class="item"><div class="flavor">Lemon Grapefruit</div><input type="number" min="0" data-flavor="Lemon Grapefruit"></div>
+  
   <div class="copy-area">
     <button onclick="copyToClipboard()">Copy To Clipboard</button>
     <div id="result"></div>
@@ -131,11 +141,12 @@
 <script>
 function copyToClipboard() {
   const inputs = document.querySelectorAll('input[type="number"]');
+  const totalKohs = 18; // 15 original + 3 new
   let text = "*Kohs / Syokbar Flavors*\n";
   let hasItem = false;
   
-  // First collect Kohs/Syokbar items (first 15 items)
-  const kohsInputs = Array.from(inputs).slice(0, 15);
+  // Kohs/Syokbar items (first 18 items)
+  const kohsInputs = Array.from(inputs).slice(0, totalKohs);
   for (let input of kohsInputs) {
     const qty = input.value.trim();
     const flavor = input.getAttribute('data-flavor');
@@ -145,9 +156,9 @@ function copyToClipboard() {
     }
   }
   
-  // Add Fuselab section
+  // Fuselab items (remaining)
   text += "\n*Fuselab Flavors*\n";
-  const fuselabInputs = Array.from(inputs).slice(15);
+  const fuselabInputs = Array.from(inputs).slice(totalKohs);
   for (let input of fuselabInputs) {
     const qty = input.value.trim();
     const flavor = input.getAttribute('data-flavor');
