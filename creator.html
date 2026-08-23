@@ -1,0 +1,24 @@
+      text += "\n";
+    });
+  } else {
+    text = "Tiada stok dimasukkan / semua 0";
+  }
+
+  // Tulis ke clipboard & papar
+  navigator.clipboard.writeText(text).then(() => {
+    const resultDiv = document.getElementById('result');
+    resultDiv.textContent = text;
+    resultDiv.style.display = 'block';
+    // Auto sembunyi selepas 12 saat
+    clearTimeout(window._resultTimeout);
+    window._resultTimeout = setTimeout(() => {
+      resultDiv.style.display = 'none';
+    }, 12000);
+  }).catch(err => {
+    alert("Gagal copy: " + err);
+  });
+}
+</script>
+
+</body>
+</html>
