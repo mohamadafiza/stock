@@ -13,6 +13,7 @@
       background: #f5f5f5;
       margin: 0;
       padding: 15px;
+      padding-top: 90px;
       color: #222;
     }
     h2 {
@@ -27,6 +28,45 @@
       max-width: 540px;
       margin: 0 auto;
     }
+
+    /* ===== STICKY TOTAL BAR ===== */
+    .total-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: linear-gradient(135deg, #1a4b7a 0%, #0d3a60 100%);
+      color: white;
+      padding: 12px 18px;
+      box-shadow: 0 4px 14px rgba(0, 40, 80, 0.25);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .total-item {
+      text-align: center;
+      flex: 1;
+      min-width: 100px;
+    }
+    .total-item .label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      opacity: 0.85;
+      margin-bottom: 2px;
+    }
+    .total-item .value {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+    .total-item .value.price {
+      color: #7ee0a8;
+    }
+
     .category {
       background: #dce3ed;
       padding: 8px 18px;
@@ -49,6 +89,7 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.04);
       border: 1px solid #eef2f6;
       transition: 0.1s ease;
+      gap: 8px;
     }
     .item:hover {
       border-color: #b9c8dd;
@@ -57,17 +98,24 @@
     .flavor {
       flex: 1;
       font-weight: 500;
-      font-size: 0.98rem;
+      font-size: 0.95rem;
       color: #1e293b;
-      padding-right: 8px;
+      padding-right: 4px;
+      min-width: 0;
+    }
+    .input-group {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      flex-shrink: 0;
     }
     input[type="number"] {
-      width: 76px;
+      width: 68px;
       text-align: center;
       padding: 8px 4px;
       border: 1px solid #d0d9e6;
       border-radius: 10px;
-      font-size: 16px;
+      font-size: 15px;
       background: #ffffff;
       transition: 0.15s;
       font-weight: 500;
@@ -85,6 +133,22 @@
     }
     input[type="number"] {
       -moz-appearance: textfield;
+    }
+    .price-input {
+      width: 80px !important;
+      background: #f0f7ff !important;
+    }
+    .price-input::placeholder {
+      color: #9ab;
+      font-size: 0.8rem;
+    }
+    .subtotal {
+      font-size: 0.78rem;
+      color: #0d7a45;
+      font-weight: 600;
+      min-width: 60px;
+      text-align: right;
+      white-space: nowrap;
     }
     .copy-area {
       margin-top: 30px;
@@ -131,82 +195,382 @@
       font-size: 0.8rem;
       color: #6c7e94;
       text-align: center;
+      padding-bottom: 20px;
+    }
+    @media (max-width: 400px) {
+      .flavor { font-size: 0.85rem; }
+      input[type="number"] { width: 58px; font-size: 14px; }
+      .price-input { width: 68px !important; }
+      .subtotal { display: none; }
     }
   </style>
 </head>
 <body>
+
+<!-- ===== STICKY TOTAL BAR ===== -->
+<div class="total-bar">
+  <div class="total-item">
+    <div class="label">📦 Total Box</div>
+    <div class="value" id="totalBox">0</div>
+  </div>
+  <div class="total-item">
+    <div class="label">💰 Total Harga</div>
+    <div class="value price" id="totalPrice">RM 0.00</div>
+  </div>
+</div>
+
 <div class="container">
   <h2>Cellera</h2>
 
   <div class="category-wrap" data-category="Cellera Hero">
     <div class="category">🦸 Hero Edition</div>
 
-    <div class="item"><div class="flavor">Lychee Blackcurrant</div><input type="number" min="0" data-flavor="Lychee Blackcurrant"></div>
-    <div class="item"><div class="flavor">Strawberry Pudina (Bubblegum)</div><input type="number" min="0" data-flavor="Strawberry Pudina (Bubblegum)"></div>
-    <div class="item"><div class="flavor">Guava</div><input type="number" min="0" data-flavor="Guava"></div>
-    <div class="item"><div class="flavor">Honeydew</div><input type="number" min="0" data-flavor="Honeydew"></div>
-    <div class="item"><div class="flavor">Mango Vanilla (Smoothie)</div><input type="number" min="0" data-flavor="Mango Vanilla (Smoothie)"></div>
-    <div class="item"><div class="flavor">Pudina (Mint)</div><input type="number" min="0" data-flavor="Pudina (Mint)"></div>
-    <div class="item"><div class="flavor">Grape Pudina</div><input type="number" min="0" data-flavor="Grape Pudina"></div>
-    <div class="item"><div class="flavor">Grape</div><input type="number" min="0" data-flavor="Grape"></div>
-    <div class="item"><div class="flavor">Mango</div><input type="number" min="0" data-flavor="Mango"></div>
-    <div class="item"><div class="flavor">Orange</div><input type="number" min="0" data-flavor="Orange"></div>
-    <div class="item"><div class="flavor">Cranberry Lychee</div><input type="number" min="0" data-flavor="Cranberry Lychee"></div>
-    <div class="item"><div class="flavor">Banana Vanilla</div><input type="number" min="0" data-flavor="Banana Vanilla"></div>
-    <div class="item"><div class="flavor">Vanilla Tobacco</div><input type="number" min="0" data-flavor="Vanilla Tobacco"></div>
-    <div class="item"><div class="flavor">Corn Vanilla (Butterscotch)</div><input type="number" min="0" data-flavor="Corn Vanilla (Butterscotch)"></div>
-    <div class="item"><div class="flavor">Hazelnut</div><input type="number" min="0" data-flavor="Hazelnut"></div>
-    <div class="item"><div class="flavor">Vanilla Berry (Custard)</div><input type="number" min="0" data-flavor="Vanilla Berry (Custard)"></div>
-    <div class="item"><div class="flavor">Corn (Oat)</div><input type="number" min="0" data-flavor="Corn (Oat)"></div>
-    <div class="item"><div class="flavor">Strawberry Corn (Cheesecake)</div><input type="number" min="0" data-flavor="Strawberry Corn (Cheesecake)"></div>
-    <div class="item"><div class="flavor">Teh</div><input type="number" min="0" data-flavor="Teh"></div>
+    <div class="item">
+      <div class="flavor">Lychee Blackcurrant</div>
+      <div class="input-group">
+        <input type="number" min="0" placeholder="Qty" data-flavor="Lychee Blackcurrant" class="qty-input">
+        <input type="number" min="0" step="0.01" placeholder="RM" class="price-input">
+        <span class="subtotal"></span>
+      </div>
+    </div>
+    <div class="item">
+      <div class="flavor">Strawberry Pudina (Bubblegum)</div>
+      <div class="input-group">
+        <input type="number" min="0" placeholder="Qty" data-flavor="Strawberry Pudina (Bubblegum)" class="qty-input">
+        <input type="number" min="0" step="0.01" placeholder="RM" class="price-input">
+        <span class="subtotal"></span>
+      </div>
+    </div>
+    <div class="item">
+      <div class="flavor">Guava</div>
+      <div class="input-group">
+        <input type="number" min="0" placeholder="Qty" data-flavor="Guava" class="qty-input">
+        <input type="number" min="0" step="0.01" placeholder="RM" class="price-input">
+        <span class="subtotal"></span>
+      </div>
+    </div>
+    <div class="item">
+      <div class="flavor">Honeydew</div>
+      <div class="input-group">
+        <input type="number" min="0" placeholder="Qty" data-flavor="Honeydew" class="qty-input">
+        <input type="number" min="0" step="0.01" placeholder="RM" class="price-input">
+        <span class="subtotal"></span>
+      </div>
+    </div>
+    <div class="item">
+      <div class="flavor">Mango Vanilla (Smoothie)</div>
+      <div class="input-group">
+        <input type="number" min="0" placeholder="Qty" data-flavor="Mango Vanilla (Smoothie)" class="qty-input">
+        <input type="number" min="0" step="0.01" placeholder="RM" class="price-input">
+        <span class="subtotal"></span>
+      </div>
+    </div>
+    <div class="item">
+      <div class="flavor">Pudina (Mint)</div>
+      <div class="input-group">
+        <input type="number" min="0" placeholder="Qty" data-flavor="Pudina (Mint)" class="qty-input">
+        <input type="number" min="0" step="0.01" placeholder="RM" class="price-input">
+        <span class="subtotal"></span>
+      </div>
+    </div>
+    <div class="item">
+      <div class="flavor">Grape Pudina</div>
+      <div class="input-group">
+        <input type="number" min="0" placeholder="Qty" data-flavor="Grape Pudina" class="qty-input">
+        <input type="number" min="0" step="0.01" placeholder="RM" class="price-input">
+        <span class="subtotal"></span>
+      </div>
+    </div>
+    <div class="item">
+      <div class="flavor">Grape</div>
+      <div class="input-group">
+        <input type="number" min="0" placeholder="Qty" data-flavor="Grape" class="qty-input">
+        <input type="number" min="0" step="0.01" placeholder="RM" class="price-input">
+        <span class="subtotal"></span>
+      </div>
+    </div>
+    <div class="item">
+      <div class="flavor">Mango</div>
+      <div class="input-group">
+        <input type="number" min="0" placeholder="Qty" data-flavor="Mango" class="qty-input">
+        <input type="number" min="0" step="0.01" placeholder="RM" class="price-input">
+        <span class="subtotal"></span>
+      </div>
+    </div>
+    <div class="item">
+      <div class="flavor">Orange</div>
+      <div class="input-group">
+        <input type="number" min="0" placeholder="Qty" data-flavor="Orange" class="qty-input">
+        <input type="number" min="0" step="0.01" placeholder="RM" class="price-input">
+        <span class="subtotal"></span>
+      </div>
+    </div>
+    <div class="item">
+      <div class="flavor">Cranberry Lychee</div>
+      <div class="input-group">
+        <input type="number" min="0" placeholder="Qty" data-flavor="Cranberry Lychee" class="qty-input">
+        <input type="number" min="0" step="0.01" placeholder="RM" class="price-input">
+        <span class="subtotal"></span>
+      </div>
+    </div>
+    <div class="item">
+      <div class="flavor">Banana Vanilla</div>
+      <div class="input-group">
+        <input type="number" min="0" placeholder="Qty" data-flavor="Banana Vanilla" class="qty-input">
+        <input type="number" min="0" step="0.01" placeholder="RM" class="price-input">
+        <span class="subtotal"></span>
+      </div>
+    </div>
+    <div class="item">
+      <div class="flavor">Vanilla Tobacco</div>
+      <div class="input-group">
+        <input type="number" min="0" placeholder="Qty" data-flavor="Vanilla Tobacco" class="qty-input">
+        <input type="number" min="0" step="0.01" placeholder="RM" class="price-input">
+        <span class="subtotal"></span>
+      </div>
+    </div>
+    <div class="item">
+      <div class="flavor">Corn Vanilla (Butterscotch)</div>
+      <div class="input-group">
+        <input type="number" min="0" placeholder="Qty" data-flavor="Corn Vanilla (Butterscotch)" class="qty-input">
+        <input type="number" min="0" step="0.01" placeholder="RM" class="price-input">
+        <span class="subtotal"></span>
+      </div>
+    </div>
+    <div class="item">
+      <div class="flavor">Hazelnut</div>
+      <div class="input-group">
+        <input type="number" min="0" placeholder="Qty" data-flavor="Hazelnut" class="qty-input">
+        <input type="number" min="0" step="0.01" placeholder="RM" class="price-input">
+        <span class="subtotal"></span>
+      </div>
+    </div>
+    <div class="item">
+      <div class="flavor">Vanilla Berry (Custard)</div>
+      <div class="input-group">
+        <input type="number" min="0" placeholder="Qty" data-flavor="Vanilla Berry (Custard)" class="qty-input">
+        <input type="number" min="0" step="0.01" placeholder="RM" class="price-input">
+        <span class="subtotal"></span>
+      </div>
+    </div>
+    <div class="item">
+      <div class="flavor">Corn (Oat)</div>
+      <div class="input-group">
+        <input type="number" min="0" placeholder="Qty" data-flavor="Corn (Oat)" class="qty-input">
+        <input type="number" min="0" step="0.01" placeholder="RM" class="price-input">
+        <span class="subtotal"></span>
+      </div>
+    </div>
+    <div class="item">
+      <div class="flavor">Strawberry Corn (Cheesecake)</div>
+      <div class="input-group">
+        <input type="number" min="0" placeholder="Qty" data-flavor="Strawberry Corn (Cheesecake)" class="qty-input">
+        <input type="number" min="0" step="0.01" placeholder="RM" class="price-input">
+        <span class="subtotal"></span>
+      </div>
+    </div>
+    <div class="item">
+      <div class="flavor">Teh</div>
+      <div class="input-group">
+        <input type="number" min="0" placeholder="Qty" data-flavor="Teh" class="qty-input">
+        <input type="number" min="0" step="0.01" placeholder="RM" class="price-input">
+        <span class="subtotal"></span>
+      </div>
+    </div>
   </div>
 
   <div class="category-wrap" data-category="Cellera Zero">
     <div class="category">⚡ Zero Edition</div>
 
-    <div class="item"><div class="flavor">Jackfruit</div><input type="number" min="0" data-flavor="Jackfruit"></div>
-    <div class="item"><div class="flavor">Strawberry Mango</div><input type="number" min="0" data-flavor="Strawberry Mango"></div>
-    <div class="item"><div class="flavor">Jambu</div><input type="number" min="0" data-flavor="Jambu"></div>
-    <div class="item"><div class="flavor">Anggur</div><input type="number" min="0" data-flavor="Anggur"></div>
-    <div class="item"><div class="flavor">Mango Peach</div><input type="number" min="0" data-flavor="Mango Peach"></div>
-    <div class="item"><div class="flavor">Mango Blackcurrant</div><input type="number" min="0" data-flavor="Mango Blackcurrant"></div>
-    <div class="item"><div class="flavor">Strawberry Vanilla</div><input type="number" min="0" data-flavor="Strawberry Vanilla"></div>
-    <div class="item"><div class="flavor">Potato (Buttercake)</div><input type="number" min="0" data-flavor="Potato (Buttercake)"></div>
-    <div class="item"><div class="flavor">Tea</div><input type="number" min="0" data-flavor="Tea"></div>
-    <div class="item"><div class="flavor">Tobacco</div><input type="number" min="0" data-flavor="Tobacco"></div>
-    <div class="item"><div class="flavor">Almond Corn (Butterscotch)</div><input type="number" min="0" data-flavor="Almond Corn (Butterscotch)"></div>
-    <div class="item"><div class="flavor">Almond (Hazelnut)</div><input type="number" min="0" data-flavor="Almond (Hazelnut)"></div>
+    <div class="item">
+      <div class="flavor">Jackfruit</div>
+      <div class="input-group">
+        <input type="number" min="0" placeholder="Qty" data-flavor="Jackfruit" class="qty-input">
+        <input type="number" min="0" step="0.01" placeholder="RM" class="price-input">
+        <span class="subtotal"></span>
+      </div>
+    </div>
+    <div class="item">
+      <div class="flavor">Strawberry Mango</div>
+      <div class="input-group">
+        <input type="number" min="0" placeholder="Qty" data-flavor="Strawberry Mango" class="qty-input">
+        <input type="number" min="0" step="0.01" placeholder="RM" class="price-input">
+        <span class="subtotal"></span>
+      </div>
+    </div>
+    <div class="item">
+      <div class="flavor">Jambu</div>
+      <div class="input-group">
+        <input type="number" min="0" placeholder="Qty" data-flavor="Jambu" class="qty-input">
+        <input type="number" min="0" step="0.01" placeholder="RM" class="price-input">
+        <span class="subtotal"></span>
+      </div>
+    </div>
+    <div class="item">
+      <div class="flavor">Anggur</div>
+      <div class="input-group">
+        <input type="number" min="0" placeholder="Qty" data-flavor="Anggur" class="qty-input">
+        <input type="number" min="0" step="0.01" placeholder="RM" class="price-input">
+        <span class="subtotal"></span>
+      </div>
+    </div>
+    <div class="item">
+      <div class="flavor">Mango Peach</div>
+      <div class="input-group">
+        <input type="number" min="0" placeholder="Qty" data-flavor="Mango Peach" class="qty-input">
+        <input type="number" min="0" step="0.01" placeholder="RM" class="price-input">
+        <span class="subtotal"></span>
+      </div>
+    </div>
+    <div class="item">
+      <div class="flavor">Mango Blackcurrant</div>
+      <div class="input-group">
+        <input type="number" min="0" placeholder="Qty" data-flavor="Mango Blackcurrant" class="qty-input">
+        <input type="number" min="0" step="0.01" placeholder="RM" class="price-input">
+        <span class="subtotal"></span>
+      </div>
+    </div>
+    <div class="item">
+      <div class="flavor">Strawberry Vanilla</div>
+      <div class="input-group">
+        <input type="number" min="0" placeholder="Qty" data-flavor="Strawberry Vanilla" class="qty-input">
+        <input type="number" min="0" step="0.01" placeholder="RM" class="price-input">
+        <span class="subtotal"></span>
+      </div>
+    </div>
+    <div class="item">
+      <div class="flavor">Potato (Buttercake)</div>
+      <div class="input-group">
+        <input type="number" min="0" placeholder="Qty" data-flavor="Potato (Buttercake)" class="qty-input">
+        <input type="number" min="0" step="0.01" placeholder="RM" class="price-input">
+        <span class="subtotal"></span>
+      </div>
+    </div>
+    <div class="item">
+      <div class="flavor">Tea</div>
+      <div class="input-group">
+        <input type="number" min="0" placeholder="Qty" data-flavor="Tea" class="qty-input">
+        <input type="number" min="0" step="0.01" placeholder="RM" class="price-input">
+        <span class="subtotal"></span>
+      </div>
+    </div>
+    <div class="item">
+      <div class="flavor">Tobacco</div>
+      <div class="input-group">
+        <input type="number" min="0" placeholder="Qty" data-flavor="Tobacco" class="qty-input">
+        <input type="number" min="0" step="0.01" placeholder="RM" class="price-input">
+        <span class="subtotal"></span>
+      </div>
+    </div>
+    <div class="item">
+      <div class="flavor">Almond Corn (Butterscotch)</div>
+      <div class="input-group">
+        <input type="number" min="0" placeholder="Qty" data-flavor="Almond Corn (Butterscotch)" class="qty-input">
+        <input type="number" min="0" step="0.01" placeholder="RM" class="price-input">
+        <span class="subtotal"></span>
+      </div>
+    </div>
+    <div class="item">
+      <div class="flavor">Almond (Hazelnut)</div>
+      <div class="input-group">
+        <input type="number" min="0" placeholder="Qty" data-flavor="Almond (Hazelnut)" class="qty-input">
+        <input type="number" min="0" step="0.01" placeholder="RM" class="price-input">
+        <span class="subtotal"></span>
+      </div>
+    </div>
   </div>
 
   <div class="copy-area">
     <button onclick="copyToClipboard()">📋 Copy Stok</button>
     <div id="result"></div>
   </div>
-  <div class="footer-note">✏️ Isi kuantiti, kemudian tekan copy. Stok sifar atau kosong akan diabaikan.</div>
+  <div class="footer-note">✏️ Isi kuantiti & harga (optional), total akan dikira automatik. Stok sifar/kosong diabaikan.</div>
 </div>
 
 <script>
+/* ===== AUTO CALCULATE TOTAL ===== */
+function recalcTotals() {
+  let totalBox = 0;
+  let totalPrice = 0;
+
+  document.querySelectorAll('.item').forEach(item => {
+    const qtyInput = item.querySelector('.qty-input');
+    const priceInput = item.querySelector('.price-input');
+    const subtotalEl = item.querySelector('.subtotal');
+
+    const qty = parseFloat(qtyInput.value) || 0;
+    const price = parseFloat(priceInput.value) || 0;
+
+    if (qty > 0) {
+      totalBox += qty;
+      if (price > 0) {
+        const sub = qty * price;
+        totalPrice += sub;
+        subtotalEl.textContent = 'RM ' + sub.toFixed(2);
+        subtotalEl.style.display = 'inline';
+      } else {
+        subtotalEl.textContent = '';
+        subtotalEl.style.display = 'none';
+      }
+    } else {
+      subtotalEl.textContent = '';
+      subtotalEl.style.display = 'none';
+    }
+  });
+
+  document.getElementById('totalBox').textContent = totalBox;
+  document.getElementById('totalPrice').textContent = 'RM ' + totalPrice.toFixed(2);
+}
+
+/* Attach listener to all qty & price inputs */
+document.querySelectorAll('.qty-input, .price-input').forEach(inp => {
+  inp.addEventListener('input', recalcTotals);
+});
+
+/* Init on load */
+recalcTotals();
+
+/* ===== COPY FUNCTION ===== */
 function copyToClipboard() {
   const wraps = document.querySelectorAll('.category-wrap');
   let text = "";
   let hasItem = false;
 
+  let grandBox = 0;
+  let grandPrice = 0;
+
   wraps.forEach(wrap => {
     const catName = wrap.getAttribute('data-category');
     let catText = "";
     let catHas = false;
+    let catBox = 0;
+    let catPrice = 0;
 
-    wrap.querySelectorAll('input[type="number"]').forEach(input => {
-      const qty = input.value.trim();
-      const flavor = input.getAttribute('data-flavor');
-      if (qty !== "" && qty !== "0" && !isNaN(qty) && Number(qty) > 0) {
-        catText += `${flavor} - ${qty}\n`;
+    wrap.querySelectorAll('.item').forEach(item => {
+      const qtyInput = item.querySelector('.qty-input');
+      const priceInput = item.querySelector('.price-input');
+      const qty = parseFloat(qtyInput.value) || 0;
+      const price = parseFloat(priceInput.value) || 0;
+      const flavor = qtyInput.getAttribute('data-flavor');
+
+      if (qty > 0) {
+        let line = `${flavor} - ${qty}`;
+        if (price > 0) {
+          line += ` x RM${price.toFixed(2)} = RM${(qty * price).toFixed(2)}`;
+          catPrice += qty * price;
+          grandPrice += qty * price;
+        }
+        catText += line + "\n";
         catHas = true;
+        catBox += qty;
+        grandBox += qty;
       }
     });
 
     if (catHas) {
+      catText += `\n📦 Subtotal ${catName}: ${catBox} box`;
+      if (catPrice > 0) catText += ` | RM${catPrice.toFixed(2)}`;
+      catText += "\n\n";
       text += `*${catName}*\n` + catText;
       hasItem = true;
     }
@@ -214,6 +578,12 @@ function copyToClipboard() {
 
   if (!hasItem) {
     text = "Tiada stok dimasukkan / semua 0";
+  } else {
+    text += `━━━━━━━━━━━━━━━━━━\n`;
+    text += `📦 *TOTAL BOX: ${grandBox}*\n`;
+    if (grandPrice > 0) {
+      text += `💰 *TOTAL HARGA: RM${grandPrice.toFixed(2)}*\n`;
+    }
   }
 
   navigator.clipboard.writeText(text).then(() => {
