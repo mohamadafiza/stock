@@ -5,49 +5,159 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Nanopods Stock</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #f5f5f5;
+      background: #f0f2f5;
       margin: 0;
       padding: 15px;
       color: #333;
     }
     h2 {
       text-align: center;
-      margin: 15px 0;
-      color: #444;
+      margin: 15px 0 5px;
+      color: #222;
+    }
+    .subtitle {
+      text-align: center;
+      color: #777;
+      font-size: 13px;
+      margin-bottom: 15px;
     }
     .container {
-      max-width: 500px;
+      max-width: 520px;
       margin: 0 auto;
     }
+
+    /* === SUMMARY PANEL === */
+    .summary {
+      background: #1e293b;
+      color: #fff;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      position: sticky;
+      top: 10px;
+      z-index: 10;
+    }
+    .summary h3 {
+      margin: 0 0 12px;
+      font-size: 15px;
+      text-align: center;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #94a3b8;
+    }
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid #334155;
+      font-size: 14px;
+    }
+    .summary-row:last-child {
+      border-bottom: none;
+    }
+    .summary-row.total {
+      margin-top: 5px;
+      padding-top: 10px;
+      border-top: 2px solid #475569;
+      font-weight: 700;
+      font-size: 16px;
+      color: #4ade80;
+    }
+    .summary-row .label {
+      color: #cbd5e1;
+    }
+    .summary-row .value {
+      font-weight: 600;
+      text-align: right;
+    }
+    .summary-row .value small {
+      display: block;
+      font-weight: 400;
+      font-size: 11px;
+      color: #94a3b8;
+      margin-top: 2px;
+    }
+
+    /* === TIER SECTIONS === */
+    .tier-section {
+      margin-bottom: 20px;
+    }
+    .tier-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #0066cc;
+      color: #fff;
+      padding: 10px 15px;
+      border-radius: 10px 10px 0 0;
+      font-weight: 700;
+      font-size: 15px;
+    }
+    .tier-header .tier-price {
+      font-size: 12px;
+      font-weight: 500;
+      background: rgba(255,255,255,0.2);
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+    .tier-2 .tier-header { background: #7c3aed; }
+    .tier-3 .tier-header { background: #059669; }
+
+    .tier-body {
+      background: #fff;
+      border-radius: 0 0 10px 10px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+
     .item {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: white;
-      padding: 12px 15px;
-      margin-bottom: 10px;
-      border-radius: 10px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      padding: 10px 15px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .item:last-child {
+      border-bottom: none;
     }
     .flavor {
       flex: 1;
       font-weight: 500;
+      font-size: 14px;
+      padding-right: 10px;
     }
     input[type="number"] {
-      width: 80px;
+      width: 75px;
       text-align: center;
       padding: 8px;
       border: 1px solid #ddd;
       border-radius: 6px;
-      font-size: 16px;
+      font-size: 15px;
+      background: #fafafa;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    input[type="number"]:focus {
+      outline: none;
+      border-color: #0066cc;
+      background: #fff;
     }
     input[type="number"]::-webkit-outer-spin-button,
     input[type="number"]::-webkit-inner-spin-button {
       -webkit-appearance: none;
       margin: 0;
     }
+    input[type="number"] {
+      -moz-appearance: textfield;
+    }
+
+    /* === COPY AREA === */
     .copy-area {
       margin-top: 25px;
       text-align: center;
@@ -56,96 +166,245 @@
       background: #0066cc;
       color: white;
       border: none;
-      padding: 14px 30px;
+      padding: 15px 40px;
       font-size: 16px;
-      border-radius: 8px;
+      font-weight: 600;
+      border-radius: 10px;
       cursor: pointer;
+      width: 100%;
+      transition: background 0.2s, transform 0.1s;
+      box-shadow: 0 2px 6px rgba(0,102,204,0.3);
     }
-    button:hover {
-      background: #0055aa;
-    }
+    button:hover { background: #0055aa; }
+    button:active { transform: scale(0.98); }
+
     #result {
       margin-top: 15px;
       white-space: pre-wrap;
+      text-align: left;
       background: #fff;
-      padding: 12px;
-      border-radius: 8px;
+      padding: 15px;
+      border-radius: 10px;
       border: 1px solid #ddd;
       min-height: 80px;
       display: none;
+      font-size: 13px;
+      line-height: 1.6;
+      font-family: 'Courier New', monospace;
+      color: #333;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #22c55e;
+      color: #fff;
+      padding: 12px 25px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+      z-index: 100;
+    }
+    .toast.show {
+      opacity: 1;
     }
   </style>
 </head>
 <body>
 
 <div class="container">
-  <h2>Nanopods</h2>
+  <h2>🔥 Nanopods Stock</h2>
+  <div class="subtitle">Masukkan kuantiti pada setiap flavor</div>
 
-  <div class="item"><div class="flavor">Coffee</div><input type="number" min="0" data-flavor="Coffee"></div>
-  <div class="item"><div class="flavor">Grape Ice</div><input type="number" min="0" data-flavor="Grape Ice"></div>
-  <div class="item"><div class="flavor">Mango Ice</div><input type="number" min="0" data-flavor="Mango Ice"></div>
-  <div class="item"><div class="flavor">Apple Ice</div><input type="number" min="0" data-flavor="Apple Ice"></div>
-  <div class="item"><div class="flavor">Coffee Hazelnut</div><input type="number" min="0" data-flavor="Coffee Hazelnut"></div>
-  <div class="item"><div class="flavor">Graple</div><input type="number" min="0" data-flavor="Graple"></div>
-  <div class="item"><div class="flavor">Strawberry Apple</div><input type="number" min="0" data-flavor="Strawberry Apple"></div>
-  <div class="item"><div class="flavor">Strawberry Vanilla</div><input type="number" min="0" data-flavor="Strawberry Vanilla"></div>
-  <div class="item"><div class="flavor">Banana Vanilla</div><input type="number" min="0" data-flavor="Banana Vanilla"></div>
-  <div class="item"><div class="flavor">Honeydew</div><input type="number" min="0" data-flavor="Honeydew"></div>
-  <div class="item"><div class="flavor">Tabac Classic</div><input type="number" min="0" data-flavor="Tabac Classic"></div>
-  <div class="item"><div class="flavor">Lychee Freezi</div><input type="number" min="0" data-flavor="Lychee Freezi"></div>
-  <div class="item"><div class="flavor">Guava Freezi</div><input type="number" min="0" data-flavor="Guava Freezi"></div>
-  <div class="item"><div class="flavor">Jackfruit Freezi</div><input type="number" min="0" data-flavor="Jackfruit Freezi"></div>
-  <div class="item"><div class="flavor">Butterscotch</div><input type="number" min="0" data-flavor="Butterscotch"></div>
-  <div class="item"><div class="flavor">Popcorn Caramel</div><input type="number" min="0" data-flavor="Popcorn Caramel"></div>
-  <div class="item"><div class="flavor">Buttercake</div><input type="number" min="0" data-flavor="Buttercake"></div>
-  <div class="item"><div class="flavor">Nova Angoor</div><input type="number" min="0" data-flavor="Nova Angoor"></div>
-  <div class="item"><div class="flavor">Nova Stroberi</div><input type="number" min="0" data-flavor="Nova Stroberi"></div>
-  <div class="item"><div class="flavor">Mystic Gold Coffee</div><input type="number" min="0" data-flavor="Mystic Gold Coffee"></div>
-  <div class="item"><div class="flavor">Tabac Sweet Corn</div><input type="number" min="0" data-flavor="Tabac Sweet Corn"></div>
-  <div class="item"><div class="flavor">Tabac Strawberry</div><input type="number" min="0" data-flavor="Tabac Strawberry"></div>
-  <div class="item"><div class="flavor">Tropix Markisa Twist</div><input type="number" min="0" data-flavor="Tropix Markisa Twist"></div>
-  <div class="item"><div class="flavor">Nordic Blueberry</div><input type="number" min="0" data-flavor="Nordic Blueberry"></div>
-  <div class="item"><div class="flavor">Enigma Strabella</div><input type="number" min="0" data-flavor="Enigma Strabella"></div>
+  <!-- LIVE SUMMARY -->
+  <div class="summary">
+    <h3>📊 Ringkasan Stok</h3>
+    <div class="summary-row">
+      <span class="label">Tier 1 <small style="color:#94a3b8">(RM58)</small></span>
+      <span class="value" id="sum-t1">0 pod <small>RM0.00</small></span>
+    </div>
+    <div class="summary-row">
+      <span class="label">Tier 2 <small style="color:#94a3b8">(RM54)</small></span>
+      <span class="value" id="sum-t2">0 pod <small>RM0.00</small></span>
+    </div>
+    <div class="summary-row">
+      <span class="label">Tier 3 <small style="color:#94a3b8">(RM50)</small></span>
+      <span class="value" id="sum-t3">0 pod <small>RM0.00</small></span>
+    </div>
+    <div class="summary-row total">
+      <span class="label">💰 TOTAL SEMUA</span>
+      <span class="value" id="sum-total">0 pod <small>RM0.00</small></span>
+    </div>
+  </div>
 
+  <!-- ================= TIER 1 ================= -->
+  <div class="tier-section tier-1">
+    <div class="tier-header">
+      <span>⭐ TIER 1</span>
+      <span class="tier-price">RM58 / pod</span>
+    </div>
+    <div class="tier-body">
+      <div class="item"><div class="flavor">Coffee Hazelnut</div><input type="number" min="0" data-flavor="Coffee Hazelnut" data-tier="1"></div>
+      <div class="item"><div class="flavor">Strawberry Vanilla</div><input type="number" min="0" data-flavor="Strawberry Vanilla" data-tier="1"></div>
+      <div class="item"><div class="flavor">Guava Freezi</div><input type="number" min="0" data-flavor="Guava Freezi" data-tier="1"></div>
+    </div>
+  </div>
+
+  <!-- ================= TIER 2 ================= -->
+  <div class="tier-section tier-2">
+    <div class="tier-header">
+      <span>⭐⭐ TIER 2</span>
+      <span class="tier-price">RM54 / pod</span>
+    </div>
+    <div class="tier-body">
+      <div class="item"><div class="flavor">Grape Ice</div><input type="number" min="0" data-flavor="Grape Ice" data-tier="2"></div>
+      <div class="item"><div class="flavor">Popcorn Caramel</div><input type="number" min="0" data-flavor="Popcorn Caramel" data-tier="2"></div>
+      <div class="item"><div class="flavor">Banana Vanilla</div><input type="number" min="0" data-flavor="Banana Vanilla" data-tier="2"></div>
+      <div class="item"><div class="flavor">Lychee Freezi</div><input type="number" min="0" data-flavor="Lychee Freezi" data-tier="2"></div>
+      <div class="item"><div class="flavor">Butterscotch</div><input type="number" min="0" data-flavor="Butterscotch" data-tier="2"></div>
+      <div class="item"><div class="flavor">Tabac Classic</div><input type="number" min="0" data-flavor="Tabac Classic" data-tier="2"></div>
+      <div class="item"><div class="flavor">Jackfruit Freezi</div><input type="number" min="0" data-flavor="Jackfruit Freezi" data-tier="2"></div>
+    </div>
+  </div>
+
+  <!-- ================= TIER 3 ================= -->
+  <div class="tier-section tier-3">
+    <div class="tier-header">
+      <span>⭐⭐⭐ TIER 3</span>
+      <span class="tier-price">RM50 / pod</span>
+    </div>
+    <div class="tier-body">
+      <div class="item"><div class="flavor">Coffee</div><input type="number" min="0" data-flavor="Coffee" data-tier="3"></div>
+      <div class="item"><div class="flavor">Mango Ice</div><input type="number" min="0" data-flavor="Mango Ice" data-tier="3"></div>
+      <div class="item"><div class="flavor">Apple Ice</div><input type="number" min="0" data-flavor="Apple Ice" data-tier="3"></div>
+      <div class="item"><div class="flavor">Graple</div><input type="number" min="0" data-flavor="Graple" data-tier="3"></div>
+      <div class="item"><div class="flavor">Strawberry Apple</div><input type="number" min="0" data-flavor="Strawberry Apple" data-tier="3"></div>
+      <div class="item"><div class="flavor">Honeydew</div><input type="number" min="0" data-flavor="Honeydew" data-tier="3"></div>
+      <div class="item"><div class="flavor">Buttercake</div><input type="number" min="0" data-flavor="Buttercake" data-tier="3"></div>
+      <div class="item"><div class="flavor">Nova Angoor</div><input type="number" min="0" data-flavor="Nova Angoor" data-tier="3"></div>
+      <div class="item"><div class="flavor">Nova Stroberi</div><input type="number" min="0" data-flavor="Nova Stroberi" data-tier="3"></div>
+      <div class="item"><div class="flavor">Mystic Gold Coffee</div><input type="number" min="0" data-flavor="Mystic Gold Coffee" data-tier="3"></div>
+      <div class="item"><div class="flavor">Tabac Sweet Corn</div><input type="number" min="0" data-flavor="Tabac Sweet Corn" data-tier="3"></div>
+      <div class="item"><div class="flavor">Tabac Strawberry</div><input type="number" min="0" data-flavor="Tabac Strawberry" data-tier="3"></div>
+      <div class="item"><div class="flavor">Tropix Markisa Twist</div><input type="number" min="0" data-flavor="Tropix Markisa Twist" data-tier="3"></div>
+      <div class="item"><div class="flavor">Nordic Blueberry</div><input type="number" min="0" data-flavor="Nordic Blueberry" data-tier="3"></div>
+      <div class="item"><div class="flavor">Enigma Strabella</div><input type="number" min="0" data-flavor="Enigma Strabella" data-tier="3"></div>
+    </div>
+  </div>
+
+  <!-- COPY BUTTON -->
   <div class="copy-area">
-    <button onclick="copyToClipboard()">Copy To Clipboard</button>
+    <button onclick="copyToClipboard()">📋 Copy To Clipboard</button>
     <div id="result"></div>
   </div>
 </div>
 
+<div class="toast" id="toast">✅ Berjaya disalin!</div>
+
 <script>
-function copyToClipboard() {
-  const inputs = document.querySelectorAll('input[type="number"]');
-  let text = "*Nanopods*\n";
-  let hasItem = false;
+  const PRICES = { 1: 58, 2: 54, 3: 50 };
 
-  inputs.forEach(input => {
-    const qty = input.value.trim();
-    const flavor = input.getAttribute('data-flavor');
-    
-    if (qty !== "" && qty !== "0" && !isNaN(qty)) {
-      text += `${flavor} - ${qty}\n`;
-      hasItem = true;
+  // Update summary on every input change
+  function updateSummary() {
+    const totals = { 1: { qty: 0, price: 0 }, 2: { qty: 0, price: 0 }, 3: { qty: 0, price: 0 } };
+
+    document.querySelectorAll('input[type="number"]').forEach(input => {
+      const qty = parseInt(input.value) || 0;
+      const tier = input.getAttribute('data-tier');
+      if (qty > 0) {
+        totals[tier].qty += qty;
+        totals[tier].price += qty * PRICES[tier];
+      }
+    });
+
+    const grandQty = totals[1].qty + totals[2].qty + totals[3].qty;
+    const grandPrice = totals[1].price + totals[2].price + totals[3].price;
+
+    for (let t = 1; t <= 3; t++) {
+      document.getElementById(`sum-t${t}`).innerHTML =
+        `${totals[t].qty} pod <small>RM${totals[t].price.toFixed(2)}</small>`;
     }
-  });
-
-  if (!hasItem) {
-    text = "Tiada stok dimasukkan / semua 0";
+    document.getElementById('sum-total').innerHTML =
+      `${grandQty} pod <small>RM${grandPrice.toFixed(2)}</small>`;
   }
 
-  // Copy ke clipboard
-  navigator.clipboard.writeText(text).then(() => {
-    const resultDiv = document.getElementById('result');
-    resultDiv.textContent = text;
-    resultDiv.style.display = 'block';
-    
-    setTimeout(() => {
-      resultDiv.style.display = 'none';
-    }, 8000);
-  }).catch(err => {
-    alert("Gagal copy: " + err);
+  // Attach listeners
+  document.querySelectorAll('input[type="number"]').forEach(input => {
+    input.addEventListener('input', updateSummary);
   });
-}
+
+  function copyToClipboard() {
+    const inputs = document.querySelectorAll('input[type="number"]');
+    const tierData = {
+      1: { name: 'TIER 1 (RM58)', items: [], qty: 0, price: 0 },
+      2: { name: 'TIER 2 (RM54)', items: [], qty: 0, price: 0 },
+      3: { name: 'TIER 3 (RM50)', items: [], qty: 0, price: 0 }
+    };
+
+    inputs.forEach(input => {
+      const qty = parseInt(input.value) || 0;
+      const flavor = input.getAttribute('data-flavor');
+      const tier = parseInt(input.getAttribute('data-tier'));
+
+      if (qty > 0) {
+        tierData[tier].items.push(`${flavor} - ${qty}`);
+        tierData[tier].qty += qty;
+        tierData[tier].price += qty * PRICES[tier];
+      }
+    });
+
+    const grandQty = tierData[1].qty + tierData[2].qty + tierData[3].qty;
+    const grandPrice = tierData[1].price + tierData[2].price + tierData[3].price;
+
+    if (grandQty === 0) {
+      showToast('⚠️ Tiada stok dimasukkan', '#f59e0b');
+      return;
+    }
+
+    let text = '*NANOPODS STOCK*\n';
+    text += '━━━━━━━━━━━━━━━\n\n';
+
+    [1, 2, 3].forEach(t => {
+      if (tierData[t].qty > 0) {
+        text += `*${tierData[t].name}*\n`;
+        tierData[t].items.forEach(item => {
+          text += `• ${item}\n`;
+        });
+        text += `Subtotal: ${tierData[t].qty} pod | RM${tierData[t].price.toFixed(2)}\n\n`;
+      }
+    });
+
+    text += '━━━━━━━━━━━━━━━\n';
+    text += `*💰 TOTAL: ${grandQty} pod*\n`;
+    text += `*💵 RM${grandPrice.toFixed(2)}*`;
+
+    navigator.clipboard.writeText(text).then(() => {
+      const resultDiv = document.getElementById('result');
+      resultDiv.textContent = text;
+      resultDiv.style.display = 'block';
+      showToast('✅ Berjaya disalin ke clipboard!', '#22c55e');
+
+      setTimeout(() => {
+        resultDiv.style.display = 'none';
+      }, 10000);
+    }).catch(err => {
+      alert("Gagal copy: " + err);
+    });
+  }
+
+  function showToast(msg, color) {
+    const toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.style.background = color;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2500);
+  }
 </script>
 </body>
 </html>
