@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Stok Perisa - Offgrid Mini OG3000</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 15px;
+      padding-top: 80px;
+      color: #222;
+    }
+    h2 {
+      text-align: center;
+      margin: 10px 0 18px 0;
+      font-weight: 600;
+      font-size: 1.6rem;
+      color: #1e293b;
+      letter-spacing: -0.3px;
+    }
+    .container {
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    /* ===== STICKY TOTAL BAR ===== */
+    .total-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: linear-gradient(135deg, #1a4b7a 0%, #0d3a60 100%);
+      color: white;
+      padding: 14px 18px;
+      box-shadow: 0 4px 14px rgba(0, 40, 80, 0.25);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .total-item {
+      text-align: center;
+    }
+    .total-item .label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      opacity: 0.85;
+      margin-bottom: 2px;
+    }
+    .total-item .value {
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .category {
+      background: #dce3ed;
+      padding: 8px 18px;
+      margin: 24px 0 12px 0;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #0b2b44;
+      display: inline-block;
+      letter-spacing: 0.3px;
+    }
+    .item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: white;
+      padding: 12px 16px;
+      margin-bottom: 8px;
+      border-radius: 14px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+      border: 1px solid #eef2f6;
+      transition: 0.1s ease;
+      gap: 8px;
+    }
+    .item:hover {
+      border-color: #b9c8dd;
+      background: #fafcff;
+    }
+    .flavor {
+      flex: 1;
+      font-weight: 500;
+      font-size: 0.98rem;
+      color: #1e293b;
+      padding-right: 8px;
+      min-width: 0;
+    }
+    input[type="number"] {
+      width: 76px;
+      text-align: center;
+      padding: 8px 4px;
+      border: 1px solid #d0d9e6;
+      border-radius: 10px;
+      font-size: 16px;
+      background: #ffffff;
+      transition: 0.15s;
+      font-weight: 500;
+      color: #0b1f33;
+      flex-shrink: 0;
+    }
+    input[type="number"]:focus {
+      outline: none;
+      border-color: #3b7cbf;
+      box-shadow: 0 0 0 3px rgba(44, 110, 203, 0.15);
+    }
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    input[type="number"] {
+      -moz-appearance: textfield;
+    }
+    .copy-area {
+      margin-top: 30px;
+      text-align: center;
+    }
+    button {
+      background: #1a4b7a;
+      color: white;
+      border: none;
+      padding: 15px 34px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 40px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 40, 80, 0.12);
+      transition: all 0.15s;
+      letter-spacing: 0.4px;
+    }
+    button:hover {
+      background: #0d3a60;
+      transform: scale(1.01);
+      box-shadow: 0 6px 14px rgba(0, 40, 80, 0.2);
+    }
+    button:active {
+      transform: scale(0.97);
+    }
+    #result {
+      margin-top: 20px;
+      white-space: pre-wrap;
+      background: #ffffff;
+      padding: 16px 18px;
+      border-radius: 16px;
+      border: 1px solid #dce3ed;
+      min-height: 70px;
+      display: none;
+      text-align: left;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #0b2b44;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    }
+    .footer-note {
+      margin-top: 16px;
+      font-size: 0.8rem;
+      color: #6c7e94;
+      text-align: center;
+      padding-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== STICKY TOTAL BAR ===== -->
+<div class="total-bar">
+  <div class="total-item">
+    <div class="label">Total Box</div>
+    <div class="value" id="totalBox">0</div>
+  </div>
+</div>
+
+<div class="container">
+  <h2>Offgrid Mini OG3000</h2>
+
+  <div class="category-wrap" data-category="Offgrid Mini OG3000">
+    <div class="category">Offgrid Mini OG3000</div>
+
+    <div class="item">
+      <div class="flavor">Berries</div>
+      <input type="number" min="0" placeholder="0" data-flavor="Berries" class="qty-input">
+    </div>
+    <div class="item">
+      <div class="flavor">Mango</div>
+      <input type="number" min="0" placeholder="0" data-flavor="Mango" class="qty-input">
+    </div>
+    <div class="item">
+      <div class="flavor">Watermelon</div>
+      <input type="number" min="0" placeholder="0" data-flavor="Watermelon" class="qty-input">
+    </div>
+    <div class="item">
+      <div class="flavor">Apple Blackcurrant</div>
+      <input type="number" min="0" placeholder="0" data-flavor="Apple Blackcurrant" class="qty-input">
+    </div>
+    <div class="item">
+      <div class="flavor">Apple Grape</div>
+      <input type="number" min="0" placeholder="0" data-flavor="Apple Grape" class="qty-input">
+    </div>
+    <div class="item">
+      <div class="flavor">Blackcurrant Mango</div>
+      <input type="number" min="0" placeholder="0" data-flavor="Blackcurrant Mango" class="qty-input">
+    </div>
+    <div class="item">
+      <div class="flavor">Cranberry Grape</div>
+      <input type="number" min="0" placeholder="0" data-flavor="Cranberry Grape" class="qty-input">
+    </div>
+    <div class="item">
+      <div class="flavor">Grape Lychee</div>
+      <input type="number" min="0" placeholder="0" data-flavor="Grape Lychee" class="qty-input">
+    </div>
+    <div class="item">
+      <div class="flavor">Honeydew Lychee</div>
+      <input type="number" min="0" placeholder="0" data-flavor="Honeydew Lychee" class="qty-input">
+    </div>
+    <div class="item">
+      <div class="flavor">Pineapple Honeydew</div>
+      <input type="number" min="0" placeholder="0" data-flavor="Pineapple Honeydew" class="qty-input">
+    </div>
+    <div class="item">
+      <div class="flavor">Raspberry Berries</div>
+      <input type="number" min="0" placeholder="0" data-flavor="Raspberry Berries" class="qty-input">
+    </div>
+    <div class="item">
+      <div class="flavor">Vanilla Lime</div>
+      <input type="number" min="0" placeholder="0" data-flavor="Vanilla Lime" class="qty-input">
+    </div>
+    <div class="item">
+      <div class="flavor">Cola</div>
+      <input type="number" min="0" placeholder="0" data-flavor="Cola" class="qty-input">
+    </div>
+    <div class="item">
+      <div class="flavor">Coffee</div>
+      <input type="number" min="0" placeholder="0" data-flavor="Coffee" class="qty-input">
+    </div>
+    <div class="item">
+      <div class="flavor">Tobacco Vanilla</div>
+      <input type="number" min="0" placeholder="0" data-flavor="Tobacco Vanilla" class="qty-input">
+    </div>
+  </div>
+
+  <div class="copy-area">
+    <button onclick="copyToClipboard()">Copy Stok</button>
+    <div id="result"></div>
+  </div>
+  <div class="footer-note">Isi kuantiti, kemudian tekan copy. Stok sifar atau kosong akan diabaikan.</div>
+</div>
+
+<script>
+/* ===== AUTO CALCULATE TOTAL BOX ===== */
+function recalcTotals() {
+  let totalBox = 0;
+  document.querySelectorAll('.qty-input').forEach(inp => {
+    const qty = parseFloat(inp.value) || 0;
+    if (qty > 0) totalBox += qty;
+  });
+  document.getElementById('totalBox').textContent = totalBox;
+}
+
+document.querySelectorAll('.qty-input').forEach(inp => {
+  inp.addEventListener('input', recalcTotals);
+});
+
+recalcTotals();
+
+/* ===== COPY FUNCTION ===== */
+function copyToClipboard() {
+  const wraps = document.querySelectorAll('.category-wrap');
+  let text = "";
+  let hasItem = false;
+
+  wraps.forEach(wrap => {
+    const catName = wrap.getAttribute('data-category');
+    let catText = "";
+    let catHas = false;
+
+    wrap.querySelectorAll('.item').forEach(item => {
+      const qtyInput = item.querySelector('.qty-input');
+      const qty = parseFloat(qtyInput.value) || 0;
+      const flavor = qtyInput.getAttribute('data-flavor');
+
+      if (qty > 0) {
+        catText += `${flavor} - ${qty}\n`;
+        catHas = true;
+      }
+    });
+
+    if (catHas) {
+      text += `${catName}\n` + catText + "\n";
+      hasItem = true;
+    }
+  });
+
+  if (!hasItem) {
+    text = "Tiada stok dimasukkan / semua 0";
+  }
+
+  navigator.clipboard.writeText(text).then(() => {
+    const resultDiv = document.getElementById('result');
+    resultDiv.textContent = text;
+    resultDiv.style.display = 'block';
+    clearTimeout(window.resultTimeout);
+    window.resultTimeout = setTimeout(() => {
+      resultDiv.style.display = 'none';
+    }, 9000);
+  }).catch(err => {
+    alert("Gagal copy: " + err);
+  });
+}
+</script>
+</body>
+</html>
